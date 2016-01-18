@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by Gregory on 1/17/2016.
  */
@@ -36,8 +38,15 @@ public class Board {
         return board;
     }
 
-    public void setPieceAt(int column, int row, int player) {
+    public void move(int column, int row, int player) {
         board[row][column] = player;
+        ArrayList[] flipArray = BoardManager.flipPieces(column, row, player, board);
+        ArrayList<Integer> xFlips = flipArray[0];
+        ArrayList<Integer> yFlips = flipArray[1];
+
+        for(int i = 0; i < xFlips.size(); i++) {
+            board[yFlips.get(i)][xFlips.get(i)] = player;
+        }
     }
 
     public int getPieceSize() {

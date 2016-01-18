@@ -42,7 +42,7 @@ public class Othello extends JPanel {
                     public void run() {
                         if(BoardManager.isLegalMove(x, y, currPlayer, gameBoard.getBoard())) {
                             //move
-                            gameBoard.setPieceAt(x,y, currPlayer);
+                            gameBoard.move(x,y, currPlayer);
                             currPlayer = (currPlayer == 1) ? 2 : 1;
                             repaint();
                         }
