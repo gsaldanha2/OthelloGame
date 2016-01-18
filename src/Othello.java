@@ -45,6 +45,7 @@ public class Othello extends JPanel {
                             gameBoard.move(x,y, currPlayer);
                             currPlayer = (currPlayer == 1) ? 2 : 1;
                             repaint();
+                            int[] aiMove = BoardManager.makeAIMove(currPlayer, gameBoard.getBoard());;
                         }
                     }
                 }).start();

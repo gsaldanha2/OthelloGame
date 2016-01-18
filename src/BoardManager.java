@@ -5,6 +5,38 @@ import java.util.ArrayList;
  */
 public class BoardManager {
 
+    public static int[] makeAIMove(int player, int[][] board) {
+        int looksAhead = 2;
+        int totalPoints = 0, totalPlayerPoints = 0, lastBestMove = 0, lastBestPlayerMove = 0;
+        ArrayList<Integer> legalMovesX = new ArrayList<Integer>(), legalMovesY = new ArrayList<Integer>();
+
+        for (int i = 0; i < looksAhead; i++) {
+            int bestMove = 0, bestPlayerMove = 0, nextBestMove = 0, nextBestPlayerMove = 0;
+            for (int r = 0; r < board.length; r++) {
+                for (int c = 0; c < board.length; c++) {
+                    if (isLegalMove(c, r, player, board)) {
+                        legalMovesX.add(c);
+                        legalMovesY.add(r);
+                    }
+                }
+            }
+
+            for (int count = 0; count < legalMovesX.size(); count++) {
+                ArrayList[] arrayLists = flipPieces(legalMovesX.get(count), legalMovesY.get(count), player, board);
+                int flips = arrayLists[0].size();
+                if (flips > bestMove)
+                    bestMove = flips;
+                else if (flips > nextBestMove)
+                    nextBestMove = flips;
+            }
+
+
+        }
+        //doesnt work
+        int[] output = {0,0};
+        return output;
+    }
+
     public static ArrayList[] flipPieces(int x, int y, int player, int[][] board) {
         int middlePieces = 0;
         boolean pieceInline = false;
