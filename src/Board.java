@@ -25,7 +25,7 @@ public class Board {
         board[size / 2 - 1][size / 2 - 1] = 1;
         board[size / 2 - 1][size / 2] = 2;
         board[size / 2][size / 2 - 1] = 2;
-        board[size / 2][size / 2] = 1;
+        board[size / 2][size / 2] = 2;
     }
 
     public int getPieceAt(int column, int row) {
