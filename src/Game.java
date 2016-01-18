@@ -3,6 +3,7 @@ import javax.swing.*;
 /**
  * Created by Gregory on 1/18/2016.
  */
+//this is the main class
 public class Game {
 
     private JFrame frame;

@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 /**
  * Created by Gregory on 1/18/2016.
  */
+//This class is a jpanel that takes care of board rendering and the board itself
 public class Board extends JPanel {
 
     private int width, height;
@@ -36,6 +37,7 @@ public class Board extends JPanel {
                     @Override
                     public void run() {
                         othello.move(y, x);
+                        repaint();
                     }
                 }).start();
             }
@@ -69,14 +71,20 @@ public class Board extends JPanel {
     }
 
     public void initializeBoard() {
+        for(int row = 0; row < height; row++) {
+            for(int col = 0; col < width; col++) {
+                setPiece(row, col, Fields.EMPTY);
+            }
+        }
+
         setPiece(height / 2 - 1, width / 2 - 1, Fields.WHITE);
         setPiece(height / 2, width / 2, Fields.WHITE);
         setPiece(height / 2, width / 2 - 1, Fields.BLACK);
         setPiece(height / 2 - 1, width / 2, Fields.BLACK);
     }
 
-    public void setPiece(Move move) {
-        board[move.row][move.col] = move.piece;
+    public void setPiece(Move move, int piece) {
+        board[move.row][move.col] = piece;
     }
 
     public void setPiece(int row, int col, int piece) {
