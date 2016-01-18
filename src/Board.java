@@ -1,75 +1,59 @@
-import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.*;
 
 /**
- * Created by Gregory on 1/17/2016.
+ * Created by Gregory on 1/18/2016.
  */
-public class Board {
+public class Board extends JPanel {
 
-    private int size;
-    private int tileSize;
-    private int pieceSize;
-    private int piecePadding;
+    private int width, height;
+    private int tilesize;
     private int[][] board;
 
-    public Board(int size, int tilePadding) {
-        this.size = size;
-        tileSize = Othello.WIDTH / size;
-        pieceSize = tileSize - tilePadding;
-        board = new int[size][size];
-        piecePadding = tilePadding / 2;
-        //init board
-        for(int r = 0; r < size; r++) {
-            for(int c = 0; c < size; c++) {
-                board[r][c] = -1;
+    public Board(int width, int height, int tilesize) {
+        this.width = width;
+        this.height = height;
+        this.tilesize = tilesize;
+        this.board =  new int[width][height];
+
+        this.setPreferredSize(new Dimension(width * tilesize, height * tilesize));
+        this.addMouseListener(new MoveClickHandler());
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        //draw background
+        g.setColor(Options.bgColor);
+        g.fillRect(0, 0, width * tilesize, height * tilesize);
+
+        //draw lines
+        g.setColor(Options.lineColor);
+        for(int row = 0; row < height; row++) {
+            for(int col = 0; col < height; col++) {
+                g.drawRect(row * tilesize, col * tilesize, tilesize, tilesize);
             }
         }
-
-        board[size / 2 - 1][size / 2 - 1] = 1;
-        board[size / 2 - 1][size / 2] = 2;
-        board[size / 2][size / 2 - 1] = 2;
-        board[size / 2][size / 2] = 2;
     }
 
-    public int getPieceAt(int column, int row) {
-        return board[row][column];
+    public void setPiece(Move move, int piece) {
+        board[move.row][move.col] = piece;
     }
 
-    public int[][] getBoard() {
-        return board;
+    public int getPieceAt(Move move) {
+       return board[move.row][move.col];
     }
 
-    public void move(int column, int row, int player) {
-        board[row][column] = player;
-        ArrayList[] flipArray = BoardManager.flipPieces(column, row, player, board);
-        ArrayList<Integer> xFlips = flipArray[0];
-        ArrayList<Integer> yFlips = flipArray[1];
-
-        for(int i = 0; i < xFlips.size(); i++) {
-            board[yFlips.get(i)][xFlips.get(i)] = player;
-        }
+    public int getPieceAt(int row, int col) {
+        return board[row][col];
     }
 
-    public int getPieceSize() {
-        return pieceSize;
+    public int getBoardWidth() {
+        return width;
     }
 
-    public int getPiecePadding() {
-        return piecePadding;
-    }
 
-    public int getTileSize() {
-        return tileSize;
-    }
-
-    public void setTileSize(int tileSize) {
-        this.tileSize = tileSize;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
+    public int getBoardHeight() {
+        return height;
     }
 }
