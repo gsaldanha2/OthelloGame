@@ -13,6 +13,7 @@ public class Fields {
     public static Color lineColor = Color.ORANGE;
     public static Color whiteColor = Color.CYAN;
     public static Color blackColor = Color.WHITE;
+    public static boolean AiMode = true;
 
     public static Color getBgColor() {
         return bgColor;

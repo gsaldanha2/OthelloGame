@@ -16,15 +16,16 @@ public class Othello {
     }
 
     public void move(int row, int col) {
-        System.out.println("MOVING");
         Move playerMove = new Move(row, col);
         if(!isLegal(playerMove, Fields.player)) {
-            System.out.println("Not Legal");
             return;
         }
         board.setPiece(playerMove, Fields.player);
         flipPieces(getFlips(playerMove, Fields.player), Fields.player);
         Fields.nextMove();
+
+        if(Fields.AiMode) {
+        }
     }
 
     public void flipPieces(ArrayList<Move> moves, int piece) {

@@ -65,7 +65,7 @@ public class Board extends JPanel {
                 if (getPieceAt(row, col) == Fields.WHITE) g.setColor(Fields.whiteColor);
                 else if(getPieceAt(row, col) == Fields.BLACK) g.setColor(Fields.blackColor);
                 else continue;
-                g.fillOval(row * tileSize, col * tileSize, tileSize, tileSize);
+                g.fillOval(col * tileSize, row * tileSize, tileSize, tileSize);
             }
         }
     }
