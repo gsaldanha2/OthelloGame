@@ -36,7 +36,7 @@ public class Board extends JPanel {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        othello.move(y, x);
+                        othello.move(y, x, Board.this);
                         repaint();
                     }
                 }).start();
@@ -81,6 +81,16 @@ public class Board extends JPanel {
         setPiece(height / 2, width / 2, Fields.WHITE);
         setPiece(height / 2, width / 2 - 1, Fields.BLACK);
         setPiece(height / 2 - 1, width / 2, Fields.BLACK);
+    }
+
+    public Board cloneBoard() {
+        Board temp = new Board(width, height, tileSize);
+        for(int row = 0; row < height; row++) {
+            for(int col = 0; col < width; col++) {
+                temp.setPiece(row, col, this.getPieceAt(row, col));
+            }
+        }
+        return temp;
     }
 
     public void setPiece(Move move, int piece) {
