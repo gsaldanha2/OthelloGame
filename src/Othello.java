@@ -20,7 +20,7 @@ public class Othello {
     public void move(int row, int col, Board board) {
         if (!gameEnded(board)) {
             humanPlayer.move(new Move(row, col), board);
-            cpuPlayer.move(board);
+            cpuPlayer.move();
         }
     }
 
