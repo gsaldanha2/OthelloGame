@@ -22,7 +22,7 @@ public class Board extends JPanel {
         this.board = new int[width][height];
         initializeBoard();
 
-        othello = new Othello(this);
+        othello = new Othello();
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {
