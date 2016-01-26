@@ -5,19 +5,12 @@ import java.util.ArrayList;
  */
 public class ComputerPlayer {
     private Othello othello;
-
+    
     public ComputerPlayer(Othello othello) {
         this.othello = othello;
     }
 
-    public void move() {
+    public void move(Board board) {
         //move ai
-        
     }
-    
-    public Move maxMove(Board boardState) {
-        ArrayList<Move> allMoves = othello.getAllLegalMoves(Fields.AI);
-    }
-
-
 }
