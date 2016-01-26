@@ -12,6 +12,11 @@ public class ComputerPlayer {
 
     public void move() {
         //move ai
+        
+    }
+    
+    public Move maxMove(Board boardState) {
+        ArrayList<Move> allMoves = othello.getAllLegalMoves(Fields.AI);
     }
 
 
