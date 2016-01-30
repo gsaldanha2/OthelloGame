@@ -13,8 +13,4 @@ public class Fields {
     public static Color lineColor = Color.ORANGE;
     public static Color whiteColor = Color.CYAN;
     public static Color blackColor = Color.WHITE;
-
-    public static void nextMove() {
-        player = (player == 1) ? 2 : 1;
-    }
 }

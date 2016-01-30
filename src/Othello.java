@@ -9,19 +9,8 @@ public class Othello {
     private int[][] directions = {{-1, -1}, {-1, 0}, {-1, 1},
             {0, -1}, {0, 1},
             {1, -1}, {1, 0}, {1, 1}};
-    private HumanPlayer humanPlayer;
-    private ComputerPlayer cpuPlayer;
 
     public Othello() {
-        humanPlayer = new HumanPlayer(this);
-        cpuPlayer = new ComputerPlayer(this);
-    }
-
-    public void move(int row, int col, Board board) {
-        if (!gameEnded(board)) {
-            humanPlayer.move(new Move(row, col), board);
-            cpuPlayer.move();
-        }
     }
 
     public boolean gameEnded(Board board) {
@@ -31,6 +20,21 @@ public class Othello {
                 if (isLegal(new Move(r, c), Fields.WHITE, board) || isLegal(new Move(r, c), Fields.BLACK, board))
                     return false;
             }
+        }
+        System.out.println("GAME OVER");
+        int player1Score = 0;
+        for (int r = 0; r < board.getBoardHeight(); r++) {
+            for (int c = 0; c < board.getBoardWidth(); c++) {
+                if (board.getPieceAt(r, c) == Fields.WHITE)
+                    player1Score++;
+            }
+        }
+        if(player1Score > 32) {
+            System.out.println("Player 1 Wins");
+        }else if(player1Score == 32) {
+            System.out.println("Tie");
+        }else {
+            System.out.println("Player 2 Wins");
         }
         return true;
     }

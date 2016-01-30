@@ -11,7 +11,10 @@ public class Board extends JPanel {
 
     private int width, height;
     private int tileSize;
+    private boolean moving = false;
     private int[][] board;
+    private HumanPlayer humanPlayer;
+    private ComputerPlayer cpuPlayer, cpuPlayer2;
 
     private Othello othello;
 
@@ -23,6 +26,9 @@ public class Board extends JPanel {
         initializeBoard();
 
         othello = new Othello();
+        humanPlayer = new HumanPlayer(othello);
+        cpuPlayer = new ComputerPlayer(othello, 1, 1);
+        cpuPlayer2 = new ComputerPlayer(othello, 2, 100);
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {
@@ -36,13 +42,59 @@ public class Board extends JPanel {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        othello.move(y, x, Board.this);
-                        repaint();
+                        //move(y, x, Board.this);
+                        move(Board.this);
                     }
                 }).start();
             }
         });
     }
+
+    //    public void move(int row, int col, Board board) {
+//        if(!moving) {
+//            moving = true;
+//            if (!othello.gameEnded(board)) {
+//                if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
+//                    moving = false;
+//                    return;
+//                }
+//                humanPlayer.move(new Move(row, col), board);
+//                repaint();
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                cpuPlayer.move(board);
+//                repaint();
+//                moving = false;
+//            }
+//        }
+//    }
+    public void move(Board board) {
+        if (!moving) {
+            moving = true;
+            if (!othello.gameEnded(board)) {
+                cpuPlayer.move(board);
+                repaint();
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+                cpuPlayer2.move(board);
+                repaint();
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+                moving = false;
+                move(board);
+            }
+        }
+    }
+
 
     @Override
     public void paint(Graphics g) {
@@ -63,7 +115,7 @@ public class Board extends JPanel {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < height; col++) {
                 if (getPieceAt(row, col) == Fields.WHITE) g.setColor(Fields.whiteColor);
-                else if(getPieceAt(row, col) == Fields.BLACK) g.setColor(Fields.blackColor);
+                else if (getPieceAt(row, col) == Fields.BLACK) g.setColor(Fields.blackColor);
                 else continue;
                 g.fillOval(col * tileSize, row * tileSize, tileSize, tileSize);
             }
@@ -71,8 +123,8 @@ public class Board extends JPanel {
     }
 
     public void initializeBoard() {
-        for(int row = 0; row < height; row++) {
-            for(int col = 0; col < width; col++) {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
                 setPiece(row, col, Fields.EMPTY);
             }
         }
@@ -85,12 +137,24 @@ public class Board extends JPanel {
 
     public Board cloneBoard() {
         Board temp = new Board(width, height, tileSize);
-        for(int row = 0; row < height; row++) {
-            for(int col = 0; col < width; col++) {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
                 temp.setPiece(row, col, this.getPieceAt(row, col));
             }
         }
         return temp;
+    }
+
+    public int evaluateBoard(int piece) {
+        int output = 0;
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                if (getPieceAt(row, col) == piece) {
+                    output++;
+                }
+            }
+        }
+        return output;
     }
 
     public void setPiece(Move move, int piece) {
