@@ -47,6 +47,8 @@ public class Othello {
         }else {
             System.out.println("Player 2 Wins");
         }
+        System.out.println("Player 1 Score: " + player1Score);
+        System.out.println("Player 2 Score: " + (64 - player1Score));
         return true;
     }
 
