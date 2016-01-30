@@ -8,6 +8,7 @@ public class ComputerPlayer {
     private int maxDepth = 5;
     private int max = 2;
     private int min = 1;
+    int counter = 0;
 
     public ComputerPlayer(Othello othello, int player, int d) {
         this.othello = othello;
@@ -24,6 +25,7 @@ public class ComputerPlayer {
         }
         Move bestMove = minimax(board);
         makeMove(bestMove, board, max);
+        System.out.println(counter);
     }
 
     public void makeMove(Move move, Board board, int piece) {
@@ -36,6 +38,7 @@ public class ComputerPlayer {
         int bestValue = -1;
         int bestIndex = -1;
         for(Move move : moves) {
+            counter++;
             int depth = 0;
             Board board = orgBoard.cloneBoard();
             makeMove(move, board, max);
@@ -59,12 +62,13 @@ public class ComputerPlayer {
 
         if(!(++depth <= maxDepth)) {
             for(Move move : moves) {
+                counter++;
                 if(othello.getValue(move, orgBoard, max) > bestValue) {
                     bestValue = othello.getValue(move, orgBoard, max);
                     bestIndex = moves.indexOf(move);
                 }
             }
-            System.out.println(moves);
+            makeMove(moves.get(bestIndex), orgBoard, max);
             return moves.get(bestIndex);
         }
 
@@ -78,6 +82,7 @@ public class ComputerPlayer {
                 bestIndex = moves.indexOf(move);
             }
         }
+        makeMove(moves.get(bestIndex), orgBoard, max);
         return moves.get(bestIndex);
     }
 
@@ -89,6 +94,7 @@ public class ComputerPlayer {
         int bestValue = -1;
         int bestIndex = 0;
         for(Move move : moves) {
+            counter++;
             Board board = orgBoard.cloneBoard();
             makeMove(move, board, min);
             Move output = maxMove(board, depth);
@@ -98,6 +104,7 @@ public class ComputerPlayer {
                 bestIndex = moves.indexOf(move);
             }
         }
+        makeMove(moves.get(bestIndex), orgBoard, min);
         return moves.get(bestIndex);
     }
 }
