@@ -66,6 +66,12 @@ public class ComputerPlayer {
             if (othello.evaluate(board, max) > bestValue) {
                 bestValue = othello.evaluate(board, max);
                 bestIndex = boards.indexOf(board);
+                int row = moves.get(bestIndex).row;
+                int col = moves.get(bestIndex).col;
+                if((col == 0 && (row == 0 || row == board.getBoardHeight())) || (col == board.getBoardWidth() && (row == 0 || row == board.getBoardHeight()))) { //corner bias
+                    System.out.println("CORNER");
+                    break;
+                }
             }
         }
         return moves.get(bestIndex);
