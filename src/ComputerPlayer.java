@@ -26,6 +26,7 @@ public class ComputerPlayer {
         Move bestMove = minimax(board);
         makeMove(bestMove, board, max);
         System.out.println(counter);
+        counter = 0;
     }
 
     public void makeMove(Move move, Board board, int piece) {
