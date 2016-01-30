@@ -17,6 +17,7 @@ public class ComputerPlayer {
     }
 
     public void move(Board board) {
+        System.out.println("\n depth: " + maxDepth + "\n");
         //move ai
         System.out.println("Making move");
         if(othello.getAllMoves(max, board).size() == 0){
