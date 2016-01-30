@@ -13,6 +13,17 @@ public class Othello {
     public Othello() {
     }
 
+    public int evaluate(Board board, int player) {
+        int player1Score = 0;
+        for (int r = 0; r < board.getBoardHeight(); r++) {
+            for (int c = 0; c < board.getBoardWidth(); c++) {
+                if (board.getPieceAt(r, c) == player)
+                    player1Score++;
+            }
+        }
+        return player1Score;
+    }
+
     public boolean gameEnded(Board board) {
         //check if possible legal moves
         for (int r = 0; r < board.getBoardHeight(); r++) {

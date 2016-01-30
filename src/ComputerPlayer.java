@@ -45,8 +45,8 @@ public class ComputerPlayer {
             makeMove(move, board, max);
             Move output = minMove(board, depth);
             if(output == null) continue;
-            if(othello.getValue(output, board, max) > bestValue) {
-                bestValue = othello.getValue(output, board, max);
+            if(othello.evaluate(board, max) > bestValue) {
+                bestValue = othello.evaluate(board, max);
                 bestIndex = moves.indexOf(move);
             }
         }

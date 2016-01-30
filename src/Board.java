@@ -80,18 +80,18 @@ public class Board extends JPanel {
             if (!othello.gameEnded(board)) {
                 cpuPlayer.move(board);
                 repaint();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 cpuPlayer2.move(board);
                 repaint();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 moving = false;
                 move(board);
             }
