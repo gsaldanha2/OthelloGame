@@ -8,6 +8,7 @@ public class Fields {
     public static final int WHITE = 1;
     public static final int BLACK = 2;
     public static final int EMPTY = -1;
+    public static int playType = 1;
     public static int player = 1, ai = 2;
     public static Color bgColor = Color.BLACK;
     public static Color lineColor = Color.ORANGE;

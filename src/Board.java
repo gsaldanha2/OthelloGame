@@ -42,53 +42,56 @@ public class Board extends JPanel {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        //move(y, x, Board.this);
-                        move(Board.this);
+                        if(Fields.playType == 1) {
+                            move(y, x, Board.this);
+                        }else {
+                            move(Board.this);
+                        }
                     }
                 }).start();
             }
         });
     }
 
-    //    public void move(int row, int col, Board board) {
-//        if(!moving) {
-//            moving = true;
-//            if (!othello.gameEnded(board)) {
-//                if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
-//                    moving = false;
-//                    return;
-//                }
-//                humanPlayer.move(new Move(row, col), board);
-//                repaint();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                cpuPlayer.move(board);
-//                repaint();
-//                moving = false;
-//            }
-//        }
-//    }
+        public void move(int row, int col, Board board) {
+        if(!moving) {
+            moving = true;
+            if (!othello.gameEnded(board)) {
+                if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
+                    moving = false;
+                    return;
+                }
+                humanPlayer.move(new Move(row, col), board);
+                repaint();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                cpuPlayer2.move(board);
+                repaint();
+                moving = false;
+            }
+        }
+    }
     public void move(Board board) {
         if (!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
                 cpuPlayer.move(board);
                 repaint();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 cpuPlayer2.move(board);
                 repaint();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 moving = false;
                 move(board);
             }
