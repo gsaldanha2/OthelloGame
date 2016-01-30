@@ -28,7 +28,7 @@ public class Board extends JPanel {
         othello = new Othello();
         humanPlayer = new HumanPlayer(othello);
         cpuPlayer = new ComputerPlayer(othello, 1, 1);
-        cpuPlayer2 = new ComputerPlayer(othello, 2, 2000);
+        cpuPlayer2 = new ComputerPlayer(othello, 2, 1);
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {
@@ -80,18 +80,18 @@ public class Board extends JPanel {
             if (!othello.gameEnded(board)) {
                 cpuPlayer.move(board);
                 repaint();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 cpuPlayer2.move(board);
                 repaint();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 moving = false;
                 move(board);
             }

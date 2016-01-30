@@ -17,22 +17,18 @@ public class ComputerPlayer {
     }
 
     public void move(Board board) {
-        System.out.println("\n depth: " + maxDepth + "\n");
         //move ai
-        System.out.println("Making move");
         if(othello.getAllMoves(max, board).size() == 0){
             System.out.println("No legal moves");
             return;
         }
         Move bestMove = minimax(board);
-        System.out.println("Calculated");
         makeMove(bestMove, board, max);
     }
 
     public void makeMove(Move move, Board board, int piece) {
         board.setPiece(move, piece);
         othello.flipPieces(othello.getFlips(move, piece, board), piece, board);
-        System.out.println("Move made");
     }
 
     public Move minimax(Board orgBoard) {
@@ -55,17 +51,16 @@ public class ComputerPlayer {
     }
 
     //ai
-    public Move maxMove(Board board, int depth) {
-        System.out.println("Running Max");
+    public Move maxMove(Board orgBoard, int depth) {
         int bestValue = -1;
         int bestIndex = 0;
-        ArrayList<Move> moves = othello.getAllMoves(max, board);
+        ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
         if(moves.size() == 0) return null;
 
         if(!(++depth <= maxDepth)) {
             for(Move move : moves) {
-                if(othello.getValue(move, board, max) > bestValue) {
-                    bestValue = othello.getValue(move, board, max);
+                if(othello.getValue(move, orgBoard, max) > bestValue) {
+                    bestValue = othello.getValue(move, orgBoard, max);
                     bestIndex = moves.indexOf(move);
                 }
             }
@@ -74,6 +69,7 @@ public class ComputerPlayer {
         }
 
         for(Move move : moves) {
+            Board board = orgBoard.cloneBoard();
             makeMove(move, board, max);
             Move output = minMove(board, depth);
             if(output == null) return null;
@@ -86,14 +82,14 @@ public class ComputerPlayer {
     }
 
     //player
-    public Move minMove(Board board, int depth) {
+    public Move minMove(Board orgBoard, int depth) {
         depth++;
-        System.out.println("Running Min");
-        ArrayList<Move> moves = othello.getAllMoves(min, board);
+        ArrayList<Move> moves = othello.getAllMoves(min, orgBoard);
         if(moves.size() == 0) return null;
         int bestValue = -1;
         int bestIndex = 0;
         for(Move move : moves) {
+            Board board = orgBoard.cloneBoard();
             makeMove(move, board, min);
             Move output = maxMove(board, depth);
             if(output == null) continue;
@@ -104,6 +100,4 @@ public class ComputerPlayer {
         }
         return moves.get(bestIndex);
     }
-
-
 }
