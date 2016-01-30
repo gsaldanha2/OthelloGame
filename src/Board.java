@@ -14,7 +14,7 @@ public class Board extends JPanel {
     private boolean moving = false;
     private int[][] board;
     private HumanPlayer humanPlayer;
-    private ComputerPlayer cpuPlayer, cpuPlayer2;
+    private ComputerPlayer cpuPlayer, cpuPlayerOpp;
 
     private Othello othello;
 
@@ -27,8 +27,8 @@ public class Board extends JPanel {
 
         othello = new Othello();
         humanPlayer = new HumanPlayer(othello);
-        cpuPlayer = new ComputerPlayer(othello, 1,4);
-        cpuPlayer2 = new ComputerPlayer(othello, 2,4);
+        cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
+        cpuPlayerOpp = new ComputerPlayer(othello, 1,Fields.difficulty);
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {
@@ -62,13 +62,12 @@ public class Board extends JPanel {
                     return;
                 }
                 humanPlayer.move(new Move(row, col), board);
+                Fields.currPlayer = Fields.BLACK;
+                Game.optionsPanel.setBackground(Fields.blackColor);
                 repaint();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                cpuPlayer2.move(board);
+                cpuPlayer.move(board);
+                Fields.currPlayer = Fields.WHITE;
+                Game.optionsPanel.setBackground(Fields.whiteColor);
                 repaint();
                 moving = false;
             }
@@ -78,20 +77,15 @@ public class Board extends JPanel {
         if (!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
+
+                cpuPlayerOpp.move(board);
+                Fields.currPlayer = Fields.BLACK;
+                Game.optionsPanel.setBackground(Fields.blackColor);
+                repaint();
                 cpuPlayer.move(board);
+                Fields.currPlayer = Fields.WHITE;
+                Game.optionsPanel.setBackground(Fields.whiteColor);
                 repaint();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-                cpuPlayer2.move(board);
-                repaint();
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
                 moving = false;
                 move(board);
             }
