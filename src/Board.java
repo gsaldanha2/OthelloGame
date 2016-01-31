@@ -64,10 +64,12 @@ public class Board extends JPanel {
                 humanPlayer.move(new Move(row, col), board);
                 Fields.currPlayer = Fields.BLACK;
                 Game.optionsPanel.setBackground(Fields.blackColor);
+                othello.updateScore(board);
                 repaint();
                 cpuPlayer.move(board);
                 Fields.currPlayer = Fields.WHITE;
                 Game.optionsPanel.setBackground(Fields.whiteColor);
+                othello.updateScore(board);
                 repaint();
                 moving = false;
             }
@@ -81,10 +83,12 @@ public class Board extends JPanel {
                 cpuPlayerOpp.move(board);
                 Fields.currPlayer = Fields.BLACK;
                 Game.optionsPanel.setBackground(Fields.blackColor);
+                othello.updateScore(board);
                 repaint();
                 cpuPlayer.move(board);
                 Fields.currPlayer = Fields.WHITE;
                 Game.optionsPanel.setBackground(Fields.whiteColor);
+                othello.updateScore(board);
                 repaint();
                 moving = false;
                 move(board);

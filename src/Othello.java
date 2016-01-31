@@ -104,6 +104,27 @@ public class Othello {
         return flippedPieces;
     }
 
+    public void updateScore(Board board) {
+        int player1Score = 0;
+        for (int r = 0; r < board.getBoardHeight(); r++) {
+            for (int c = 0; c < board.getBoardWidth(); c++) {
+                if (board.getPieceAt(r, c) == Fields.WHITE)
+                    player1Score++;
+            }
+        }
+        int player2Score = 0;
+        for (int r = 0; r < board.getBoardHeight(); r++) {
+            for (int c = 0; c < board.getBoardWidth(); c++) {
+                if (board.getPieceAt(r, c) == Fields.BLACK)
+                    player2Score++;
+            }
+        }
+        Fields.player1score = player1Score;
+        Fields.player2score = player2Score;
+        int remaining = 64 - player1Score - player2Score;
+        Game.scoreLabel.setText("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + remaining);
+    }
+
     public boolean isLegal(Move move, int piece, Board board) {
         int row = move.row;
         int col = move.col;

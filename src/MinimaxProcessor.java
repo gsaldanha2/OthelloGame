@@ -60,6 +60,12 @@ public class MinimaxProcessor implements Callable<Board> {
             if (othello.evaluate(board, max) > bestValue) {
                 bestValue = othello.evaluate(board, max);
                 bestIndex = moves.indexOf(move);
+                int row = moves.get(bestIndex).row;
+                int col = moves.get(bestIndex).col;
+                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                    System.out.println("DECTECTED CORNER ATTEMPT");
+                    break;
+                }
             }
         }
         cpu.makeMove(moves.get(bestIndex), orgBoard, max);
@@ -80,6 +86,12 @@ public class MinimaxProcessor implements Callable<Board> {
             if (othello.evaluate(board, max) < bestValue) {
                 bestValue = othello.evaluate(board, max);
                 bestIndex = moves.indexOf(move);
+                int row = moves.get(bestIndex).row;
+                int col = moves.get(bestIndex).col;
+                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                    System.out.println("DECTECTED CORNER ATTEMPT");
+                    break;
+                }
             }
         }
         cpu.makeMove(moves.get(bestIndex), orgBoard, min);

@@ -11,6 +11,7 @@ public class Fields {
     public static int playType = 1;
     public static int difficulty = 1;
     public static int player = 1, ai = 2, currPlayer = 1;
+    public static int player1score = 2, player2score = 2;
     public static Color bgColor = Color.BLACK;
     public static Color lineColor = Color.ORANGE;
     public static Color whiteColor = Color.CYAN;

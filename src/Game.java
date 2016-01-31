@@ -12,7 +12,8 @@ public class Game {
     private JFrame frame, startFrame;
     private Board board;
     public static JPanel optionsPanel;
-    private final String[] levels = {"Easy", "Medium", "Hard"};
+    public static JLabel scoreLabel;
+    private final String[] levels = {"Easy", "Medium", "Hard", "Insane"};
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -53,7 +54,8 @@ public class Game {
                     Fields.difficulty = 2;
                 else if(level.equalsIgnoreCase("hard"))
                     Fields.difficulty = 3;
-
+                else if(level.equalsIgnoreCase("insane"))
+                    Fields.difficulty = 4;
                 startFrame.dispose();
                 startGame();
             }
@@ -61,7 +63,9 @@ public class Game {
     }
 
     public void startGame() {
+        scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score);
         optionsPanel = new JPanel();
+        optionsPanel.add(scoreLabel);
         optionsPanel.setPreferredSize(new Dimension(200, 300));
         optionsPanel.setBackground(Fields.whiteColor);
         JFrame optionsFrame = new JFrame();
@@ -69,9 +73,11 @@ public class Game {
         optionsFrame.setResizable(false);
         optionsFrame.add(optionsPanel);
         optionsFrame.pack();
-        optionsFrame.setLocation(800, 800);
+        optionsFrame.setLocation(1320, 300);
         optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         optionsFrame.setVisible(true);
+
+        System.out.println("Difficulty: " + Fields.difficulty);
 
         board = new Board(8, 8, 86);
 

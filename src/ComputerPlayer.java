@@ -40,7 +40,6 @@ public class ComputerPlayer {
         ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
         ArrayList<Board> boards = new ArrayList<Board>();
 
-        System.out.println(moves.size());
         ExecutorService executorService = Executors.newFixedThreadPool(moves.size());
         List<Future<Board>> list = new ArrayList<Future<Board>>();
 
@@ -68,8 +67,8 @@ public class ComputerPlayer {
                 bestIndex = boards.indexOf(board);
                 int row = moves.get(bestIndex).row;
                 int col = moves.get(bestIndex).col;
-                if((col == 0 && (row == 0 || row == board.getBoardHeight())) || (col == board.getBoardWidth() && (row == 0 || row == board.getBoardHeight()))) { //corner bias
-                    System.out.println("CORNER");
+                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                    System.out.println("DECTECTED CORNER ATTEMPT");
                     break;
                 }
             }
