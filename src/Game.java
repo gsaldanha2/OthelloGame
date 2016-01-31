@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 /**
  * Created by Gregory on 1/18/2016.
@@ -34,13 +39,15 @@ public class Game {
         JLabel addonsLabel = new JLabel("AI ADDONS");
         JLabel basicLabel = new JLabel("BASIC SETTINGS");
 
+        ButtonGroup group1 = new ButtonGroup();
         final JCheckBox minimaxBox = new JCheckBox("Minimax", true);
         final JCheckBox casualBox = new JCheckBox("Casual");
         final JCheckBox randomBox = new JCheckBox("Random");
+        group1.add(minimaxBox);
+        group1.add(casualBox);
+        group1.add(randomBox);
 
         final JCheckBox cornerBox = new JCheckBox("Corner Bias", true); //addon
-
-        final JCheckBox[] aiModeArray = {minimaxBox, casualBox, randomBox};
 
         JButton btn = new JButton("Start");
         final JComboBox diffCombo = new JComboBox(levels);
@@ -51,6 +58,8 @@ public class Game {
         //add elements
         panel.add(basicLabel);
         panel.add(aiBox);
+        panel.add(aiPlayerBox);
+        panel.add(twoPlayerBox);
         panel.add(diffCombo);
         panel.add(settingsLabel);
         panel.add(minimaxBox);
@@ -78,16 +87,6 @@ public class Game {
                     Fields.playType = 1;
                 }else if(twoPlayerBox.isSelected()) {
                     Fields.playType = 2;
-                }
-
-                int validInput = 0;
-                for(JCheckBox box : aiModeArray) {
-                    if(box.isSelected())
-                        validInput++;
-                }
-                if(validInput == 0 || validInput > 1) {
-                    System.out.println("INVALID INPUT");
-                    return;
                 }
 
                 if(minimaxBox.isSelected())
@@ -119,14 +118,20 @@ public class Game {
         scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + 60);
         gameOverLabel = new JLabel("Running");
         JButton changeColors = new JButton("Change Color");
+        JButton giveUp = new JButton("Give up");
+        giveUp.setBackground(Color.yellow);
         final JComboBox colorSelector = new JComboBox(new String[] {"P1", "P2", "Line", "Background"});
+
         optionsPanel = new JPanel();
+        optionsPanel.setLayout(new GridLayout(0,1));
         optionsPanel.setPreferredSize(new Dimension(150, 300));
         optionsPanel.add(scoreLabel);
         optionsPanel.add(gameOverLabel);
         optionsPanel.add(colorSelector);
         optionsPanel.add(changeColors);
+        optionsPanel.add(giveUp);
         optionsPanel.setBackground(Fields.whiteColor);
+
         JFrame optionsFrame = new JFrame();
         optionsFrame.setTitle("Game Info");
         optionsFrame.setResizable(false);
@@ -150,6 +155,18 @@ public class Game {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+        giveUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ObjButtons[] = {"Yes","No"};
+                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to quit?","Confirm Exit",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                if(PromptResult==JOptionPane.YES_OPTION)
+                {
+                    restart();
+                }
+            }
+        });
+
         changeColors.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,4 +184,30 @@ public class Game {
         });
     }
 
+    public void restart() {
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        final File currentJar;
+        try {
+            currentJar = new File(Game.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+              /* is it a jar file? */
+            if(!currentJar.getName().endsWith(".jar"))
+                return;
+
+            /* Build command: java -jar application.jar */
+            final ArrayList<String> command = new ArrayList<String>();
+            command.add(javaBin);
+            command.add("-jar");
+            command.add(currentJar.getPath());
+
+            final ProcessBuilder builder = new ProcessBuilder(command);
+            try {
+                builder.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.exit(0);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
 }

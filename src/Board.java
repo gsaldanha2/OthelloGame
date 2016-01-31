@@ -83,11 +83,14 @@ public class Board extends JPanel {
         if(!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
-                if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
+                if (!othello.isLegal(new Move(row, col), Fields.currPlayer, board)) {
                     moving = false;
                     return;
                 }
-                humanPlayer.move(new Move(row, col), board);
+                if(Fields.currPlayer == 1)
+                    humanPlayer.move(new Move(row, col), board);
+                else
+                    humanPlayer.move(new Move(row, col), board);
                 Fields.currPlayer = (Fields.currPlayer == Fields.BLACK) ? Fields.WHITE : Fields.BLACK;
                 Game.optionsPanel.setBackground(Fields.blackColor);
                 othello.updateScore(board);
