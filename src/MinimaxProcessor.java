@@ -37,7 +37,7 @@ public class MinimaxProcessor implements Callable<Board> {
     }
 
     public Move maxMove(Board orgBoard, int depth) {
-        int bestValue = 64;
+        int bestValue = orgBoard.getBoardHeight() * orgBoard.getBoardWidth();
         int bestIndex = 0;
         ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
         if (moves.size() == 0) return null;
@@ -75,7 +75,7 @@ public class MinimaxProcessor implements Callable<Board> {
         depth++;
         ArrayList<Move> moves = othello.getAllMoves(min, orgBoard);
         if (moves.size() == 0) return null;
-        int bestValue = 64;
+        int bestValue = orgBoard.getBoardHeight() * orgBoard.getBoardWidth();
         int bestIndex = 0;
         for (Move move : moves) {
             Board board = orgBoard.cloneBoard();

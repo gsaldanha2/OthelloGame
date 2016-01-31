@@ -47,9 +47,10 @@ public class Othello {
                     player2Score++;
             }
         }
-        if(player1Score > 32) {
+        int boardsize = board.getBoardHeight() * board.getBoardWidth();
+        if(player1Score > boardsize/2) {
             Game.gameOverLabel.setText("Game Over! Player 1 Wins");
-        }else if(player1Score == 32) {
+        }else if(player1Score == boardsize/2) {
             Game.gameOverLabel.setText("Game Over! Draw");
         }else {
             Game.gameOverLabel.setText("Game Over! Player 2 Wins");
@@ -128,8 +129,7 @@ public class Othello {
         }
         Fields.player1score = player1Score;
         Fields.player2score = player2Score;
-        int remaining = 64 - player1Score - player2Score;
-        Game.scoreLabel.setText("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + remaining);
+        Game.scoreLabel.setText("Score: " + Fields.player1score + " v " + Fields.player2score);
     }
 
     public boolean isLegal(Move move, int piece, Board board) {
