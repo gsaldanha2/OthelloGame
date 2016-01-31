@@ -36,23 +36,32 @@ public class Game {
         group.add(aiPlayerBox);
         group.add(twoPlayerBox);
 
-        JLabel settingsLabel = new JLabel("AI SETTINGS");firstAiOptionsArray.add(settingsLabel);
+        JLabel settingsLabel = new JLabel("AI SETTINGS");
+        firstAiOptionsArray.add(settingsLabel);
         JLabel settings2Label = new JLabel("AI 2nd Player");
+        settingsLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        settings2Label.setFont(new Font("Arial", Font.BOLD, 14));
         secondAiOptionsArray.add(settings2Label);
-        JLabel addonsLabel = new JLabel("AI ADDONS"); firstAiOptionsArray.add(addonsLabel);
+        JLabel addonsLabel = new JLabel("AI ADDONS");
+        firstAiOptionsArray.add(addonsLabel);
         JLabel addonsLabel2 = new JLabel("AI 2nd ADDONS");
         secondAiOptionsArray.add(addonsLabel2);
         JLabel basicLabel = new JLabel("BASIC SETTINGS");
+        basicLabel.setFont(new Font("Arial", Font.BOLD, 14));
 
         ButtonGroup group1 = new ButtonGroup();
-        final JCheckBox minimaxBox = new JCheckBox("Minimax", true); firstAiOptionsArray.add(minimaxBox);
-        final JCheckBox casualBox = new JCheckBox("Casual");firstAiOptionsArray.add(casualBox);
-        final JCheckBox randomBox = new JCheckBox("Random");firstAiOptionsArray.add(randomBox);
+        final JCheckBox minimaxBox = new JCheckBox("Minimax", true);
+        firstAiOptionsArray.add(minimaxBox);
+        final JCheckBox casualBox = new JCheckBox("Casual");
+        firstAiOptionsArray.add(casualBox);
+        final JCheckBox randomBox = new JCheckBox("Random");
+        firstAiOptionsArray.add(randomBox);
         group1.add(minimaxBox);
         group1.add(casualBox);
         group1.add(randomBox);
 
-        final JCheckBox cornerBox = new JCheckBox("Corner Bias", true); firstAiOptionsArray.add(cornerBox);
+        final JCheckBox cornerBox = new JCheckBox("Corner Bias", true);
+        firstAiOptionsArray.add(cornerBox);
 
         //second ai options
         ButtonGroup group2 = new ButtonGroup();
@@ -70,8 +79,10 @@ public class Game {
         secondAiOptionsArray.add(cornerBoxOpp);
 
         JButton btn = new JButton("Start");
-        final JComboBox diffCombo1 = new JComboBox(levels); firstAiOptionsArray.add(diffCombo1);
-        final JComboBox diffCombo2 = new JComboBox(levels); secondAiOptionsArray.add(diffCombo2);
+        final JComboBox diffCombo1 = new JComboBox(levels);
+        firstAiOptionsArray.add(diffCombo1);
+        final JComboBox diffCombo2 = new JComboBox(levels);
+        secondAiOptionsArray.add(diffCombo2);
 
         for (Component c : secondAiOptionsArray) {
             c.setVisible(false);
