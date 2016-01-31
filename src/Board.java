@@ -13,7 +13,7 @@ public class Board extends JPanel {
     private int tileSize;
     private boolean moving = false;
     private int[][] board;
-    private HumanPlayer humanPlayer;
+    private HumanPlayer humanPlayer, humanPlayer2;
     private ComputerPlayer cpuPlayer, cpuPlayerOpp;
 
     private Othello othello;
@@ -27,6 +27,7 @@ public class Board extends JPanel {
 
         othello = new Othello();
         humanPlayer = new HumanPlayer(othello);
+        humanPlayer2 = new HumanPlayer(othello);
         cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
         cpuPlayerOpp = new ComputerPlayer(othello, 1,Fields.difficulty);
 
@@ -44,6 +45,8 @@ public class Board extends JPanel {
                     public void run() {
                         if(Fields.playType == 1) {
                             move(y, x, Board.this);
+                        }else if(Fields.playType == 2) {
+                            twoPlayerMove(y, x, Board.this);
                         }else {
                             move(Board.this);
                         }
@@ -52,8 +55,7 @@ public class Board extends JPanel {
             }
         });
     }
-
-        public void move(int row, int col, Board board) {
+    public void move(int row, int col, Board board) {
         if(!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
@@ -76,6 +78,26 @@ public class Board extends JPanel {
             }
         }
     }
+
+    public void twoPlayerMove(int row, int col, Board board) {
+        if(!moving) {
+            moving = true;
+            if (!othello.gameEnded(board)) {
+                if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
+                    moving = false;
+                    return;
+                }
+                humanPlayer.move(new Move(row, col), board);
+                Fields.currPlayer = (Fields.currPlayer == Fields.BLACK) ? Fields.WHITE : Fields.BLACK;
+                Game.optionsPanel.setBackground(Fields.blackColor);
+                othello.updateScore(board);
+                repaint();
+                moving = false;
+                othello.gameEnded(board);
+            }
+        }
+    }
+
     public void move(Board board) {
         if (!moving) {
             moving = true;

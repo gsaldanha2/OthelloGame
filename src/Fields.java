@@ -9,6 +9,7 @@ public class Fields {
     public static final int BLACK = 2;
     public static final int EMPTY = -1;
     public static int playType = 1;
+    public static boolean minimax = false, corners = false, random = false, casual = false;
     public static int difficulty = 1;
     public static int player = 1, ai = 2, currPlayer = 1;
     public static int player1score = 2, player2score = 2;

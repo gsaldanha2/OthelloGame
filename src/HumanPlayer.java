@@ -9,7 +9,7 @@ public class HumanPlayer {
     }
 
     public void move(Move playerMove, Board board) {
-        board.setPiece(playerMove, Fields.player);
-        othello.flipPieces(othello.getFlips(playerMove, Fields.player, board), Fields.player, board);
+        board.setPiece(playerMove, Fields.currPlayer);
+        othello.flipPieces(othello.getFlips(playerMove, Fields.currPlayer, board), Fields.currPlayer, board);
     }
 }

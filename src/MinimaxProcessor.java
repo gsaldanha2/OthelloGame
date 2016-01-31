@@ -62,7 +62,7 @@ public class MinimaxProcessor implements Callable<Board> {
                 bestIndex = moves.indexOf(move);
                 int row = moves.get(bestIndex).row;
                 int col = moves.get(bestIndex).col;
-                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                if(Fields.corners && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
                     System.out.println("DECTECTED CORNER ATTEMPT");
                     break;
                 }
@@ -88,7 +88,7 @@ public class MinimaxProcessor implements Callable<Board> {
                 bestIndex = moves.indexOf(move);
                 int row = moves.get(bestIndex).row;
                 int col = moves.get(bestIndex).col;
-                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                if(Fields.corners && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
                     System.out.println("DECTECTED CORNER ATTEMPT");
                     break;
                 }

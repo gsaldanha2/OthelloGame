@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,8 +28,52 @@ public class ComputerPlayer {
             System.out.println("No legal moves");
             return;
         }
-        Move bestMove = minimax(board);
-        makeMove(bestMove, board, max);
+        if(Fields.minimax) {
+            Move bestMove = minimax(board);
+            makeMove(bestMove, board, max);
+        }else if(Fields.random) {
+            Move move = random(board);
+            makeMove(move, board, max);
+        }else if(Fields.casual) {
+            Move move = casual(board);
+            makeMove(move, board, max);
+        }
+    }
+
+    public Move random(Board board) {
+        ArrayList<Move> moves = othello.getAllMoves(max, board);
+        if(Fields.corners) {
+            for (Move move : moves) {
+                int row = move.row;
+                int col = move.col;
+                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                    return move;
+                }
+            }
+        }
+        Random random = new Random();
+        return moves.get(random.nextInt(moves.size()));
+    }
+
+    public Move casual(Board board) {
+        ArrayList<Move> moves = othello.getAllMoves(max, board);
+        int bestValue = -1;
+        int bestIndex = -1;
+        for(Move move : moves) {
+            int val = othello.getValue(move, board, max);
+            if(val > bestValue) {
+                bestValue = val;
+                bestIndex = moves.indexOf(move);
+                int row = move.row;
+                int col = move.col;
+                if(Fields.corners && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                    System.out.println("GRABBING CORNER");
+                    break;
+                }
+            }
+        }
+
+        return moves.get(bestIndex);
     }
 
     public void makeMove(Move move, Board board, int piece) {
@@ -67,8 +112,8 @@ public class ComputerPlayer {
                 bestIndex = boards.indexOf(board);
                 int row = moves.get(bestIndex).row;
                 int col = moves.get(bestIndex).col;
-                if((col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
-                    System.out.println("DECTECTED CORNER ATTEMPT");
+                if(Fields.corners && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                    System.out.println("GRABBING CORNER");
                     break;
                 }
             }
