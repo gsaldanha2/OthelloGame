@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -13,6 +12,9 @@ import java.util.ArrayList;
  */
 //this is the main class
 public class Game {
+
+    private ArrayList<Component> secondAiOptionsArray = new ArrayList<Component>();
+    private ArrayList<Component> firstAiOptionsArray = new ArrayList<Component>();
 
     private JFrame frame, startFrame;
     private Board board;
@@ -26,7 +28,6 @@ public class Game {
     }
 
     public void openWindow() {
-
         ButtonGroup group = new ButtonGroup();
         final JRadioButton aiBox = new JRadioButton("AI vs AI");
         final JRadioButton aiPlayerBox = new JRadioButton("Player vs AI", true);
@@ -35,38 +36,71 @@ public class Game {
         group.add(aiPlayerBox);
         group.add(twoPlayerBox);
 
-        JLabel settingsLabel = new JLabel("AI SETTINGS");
-        JLabel addonsLabel = new JLabel("AI ADDONS");
+        JLabel settingsLabel = new JLabel("AI SETTINGS");firstAiOptionsArray.add(settingsLabel);
+        JLabel settings2Label = new JLabel("AI 2nd Player");
+        secondAiOptionsArray.add(settings2Label);
+        JLabel addonsLabel = new JLabel("AI ADDONS"); firstAiOptionsArray.add(addonsLabel);
+        JLabel addonsLabel2 = new JLabel("AI 2nd ADDONS");
+        secondAiOptionsArray.add(addonsLabel2);
         JLabel basicLabel = new JLabel("BASIC SETTINGS");
 
         ButtonGroup group1 = new ButtonGroup();
-        final JCheckBox minimaxBox = new JCheckBox("Minimax", true);
-        final JCheckBox casualBox = new JCheckBox("Casual");
-        final JCheckBox randomBox = new JCheckBox("Random");
+        final JCheckBox minimaxBox = new JCheckBox("Minimax", true); firstAiOptionsArray.add(minimaxBox);
+        final JCheckBox casualBox = new JCheckBox("Casual");firstAiOptionsArray.add(casualBox);
+        final JCheckBox randomBox = new JCheckBox("Random");firstAiOptionsArray.add(randomBox);
         group1.add(minimaxBox);
         group1.add(casualBox);
         group1.add(randomBox);
 
-        final JCheckBox cornerBox = new JCheckBox("Corner Bias", true); //addon
+        final JCheckBox cornerBox = new JCheckBox("Corner Bias", true); firstAiOptionsArray.add(cornerBox);
+
+        //second ai options
+        ButtonGroup group2 = new ButtonGroup();
+        final JCheckBox minimaxBoxOpp = new JCheckBox("Minimax", true);
+        secondAiOptionsArray.add(minimaxBoxOpp);
+        final JCheckBox casualBoxOpp = new JCheckBox("Casual");
+        secondAiOptionsArray.add(casualBoxOpp);
+        final JCheckBox randomBoxOpp = new JCheckBox("Random");
+        secondAiOptionsArray.add(randomBoxOpp);
+        group1.add(minimaxBox);
+        group1.add(casualBox);
+        group1.add(randomBox);
+
+        final JCheckBox cornerBoxOpp = new JCheckBox("Corner Bias", true);
+        secondAiOptionsArray.add(cornerBoxOpp);
 
         JButton btn = new JButton("Start");
-        final JComboBox diffCombo = new JComboBox(levels);
+        final JComboBox diffCombo1 = new JComboBox(levels); firstAiOptionsArray.add(diffCombo1);
+        final JComboBox diffCombo2 = new JComboBox(levels); secondAiOptionsArray.add(diffCombo2);
 
-        JPanel panel = new JPanel();
+        for (Component c : secondAiOptionsArray) {
+            c.setVisible(false);
+        }
+
+        final JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1));
-        panel.setPreferredSize(new Dimension(300, 500));
+        panel.setPreferredSize(new Dimension(300, 600));
         //add elements
         panel.add(basicLabel);
         panel.add(aiBox);
         panel.add(aiPlayerBox);
         panel.add(twoPlayerBox);
-        panel.add(diffCombo);
         panel.add(settingsLabel);
         panel.add(minimaxBox);
         panel.add(casualBox);
         panel.add(randomBox);
         panel.add(addonsLabel);
         panel.add(cornerBox);
+        panel.add(diffCombo1);
+
+        panel.add(settings2Label);
+        panel.add(minimaxBoxOpp);
+        panel.add(casualBoxOpp);
+        panel.add(randomBoxOpp);
+        panel.add(addonsLabel2);
+        panel.add(cornerBoxOpp);
+        panel.add(diffCombo2);
+
         panel.add(btn);
 
         startFrame = new JFrame();
@@ -78,36 +112,92 @@ public class Game {
         startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startFrame.setVisible(true);
 
+        aiBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Component c : secondAiOptionsArray) {
+                    c.setVisible(true);
+                }
+                for (Component c : firstAiOptionsArray) {
+                    c.setVisible(true);
+                }
+            }
+        });
+
+        twoPlayerBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Component c : secondAiOptionsArray) {
+                    c.setVisible(false);
+                }
+                for (Component c : firstAiOptionsArray) {
+                    c.setVisible(false);
+                }
+            }
+        });
+        aiPlayerBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Component c : secondAiOptionsArray) {
+                    c.setVisible(false);
+                }
+                for (Component c : firstAiOptionsArray) {
+                    c.setVisible(true);
+                }
+            }
+        });
+
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(aiBox.isSelected()) {
+                if (aiBox.isSelected()) {
                     Fields.playType = 0;
-                }else if(aiPlayerBox.isSelected()) {
+                } else if (aiPlayerBox.isSelected()) {
                     Fields.playType = 1;
-                }else if(twoPlayerBox.isSelected()) {
+                } else if (twoPlayerBox.isSelected()) {
                     Fields.playType = 2;
                 }
 
-                if(minimaxBox.isSelected())
+                if (minimaxBox.isSelected())
                     Fields.minimax = true;
-                else if(randomBox.isSelected())
+                else if (randomBox.isSelected())
                     Fields.random = true;
-                else if(casualBox.isSelected())
+                else if (casualBox.isSelected())
                     Fields.casual = true;
 
-                if(cornerBox.isSelected())
+                if (cornerBox.isSelected())
                     Fields.corners = true;
 
-                String level = diffCombo.getSelectedItem().toString();
-                if(level.equalsIgnoreCase("easy"))
+                if (minimaxBoxOpp.isSelected())
+                    Fields.minimaxOpp = true;
+                else if (randomBoxOpp.isSelected())
+                    Fields.randomOpp = true;
+                else if (casualBoxOpp.isSelected())
+                    Fields.casualOpp = true;
+
+                if (cornerBoxOpp.isSelected())
+                    Fields.cornersOpp = true;
+
+                String level = diffCombo1.getSelectedItem().toString();
+                if (level.equalsIgnoreCase("easy"))
                     Fields.difficulty = 1;
-                else if(level.equalsIgnoreCase("medium"))
+                else if (level.equalsIgnoreCase("medium"))
                     Fields.difficulty = 2;
-                else if(level.equalsIgnoreCase("hard"))
+                else if (level.equalsIgnoreCase("hard"))
                     Fields.difficulty = 3;
-                else if(level.equalsIgnoreCase("insane"))
+                else if (level.equalsIgnoreCase("insane"))
                     Fields.difficulty = 4;
+
+                level = diffCombo2.getSelectedItem().toString();
+                if (level.equalsIgnoreCase("easy"))
+                    Fields.difficultyOpp = 1;
+                else if (level.equalsIgnoreCase("medium"))
+                    Fields.difficultyOpp = 2;
+                else if (level.equalsIgnoreCase("hard"))
+                    Fields.difficultyOpp = 3;
+                else if (level.equalsIgnoreCase("insane"))
+                    Fields.difficultyOpp = 4;
+
                 startFrame.dispose();
                 startGame();
             }
@@ -120,10 +210,10 @@ public class Game {
         JButton changeColors = new JButton("Change Color");
         JButton giveUp = new JButton("Give up");
         giveUp.setBackground(Color.yellow);
-        final JComboBox colorSelector = new JComboBox(new String[] {"P1", "P2", "Line", "Background"});
+        final JComboBox colorSelector = new JComboBox(new String[]{"P1", "P2", "Line", "Background"});
 
         optionsPanel = new JPanel();
-        optionsPanel.setLayout(new GridLayout(0,1));
+        optionsPanel.setLayout(new GridLayout(0, 1));
         optionsPanel.setPreferredSize(new Dimension(150, 300));
         optionsPanel.add(scoreLabel);
         optionsPanel.add(gameOverLabel);
@@ -132,7 +222,7 @@ public class Game {
         optionsPanel.add(giveUp);
         optionsPanel.setBackground(Fields.whiteColor);
 
-        JFrame optionsFrame = new JFrame();
+        final JFrame optionsFrame = new JFrame();
         optionsFrame.setTitle("Game Info");
         optionsFrame.setResizable(false);
         optionsFrame.add(optionsPanel);
@@ -158,10 +248,9 @@ public class Game {
         giveUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ObjButtons[] = {"Yes","No"};
-                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to quit?","Confirm Exit",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
-                if(PromptResult==JOptionPane.YES_OPTION)
-                {
+                String ObjButtons[] = {"Yes", "No"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to quit?", "Confirm Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
                     restart();
                 }
             }
@@ -171,15 +260,20 @@ public class Game {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String colorToChange = colorSelector.getSelectedItem().toString();
-                if(colorToChange.equalsIgnoreCase("P1"))
+                if (colorToChange.equalsIgnoreCase("P1"))
                     Fields.whiteColor = JColorChooser.showDialog(frame, "Choose Player 1 Color", Fields.whiteColor);
-                else if(colorToChange.equalsIgnoreCase("P2"))
+                else if (colorToChange.equalsIgnoreCase("P2"))
                     Fields.blackColor = JColorChooser.showDialog(frame, "Choose Player 2 Color", Fields.blackColor);
-                else if(colorToChange.equalsIgnoreCase("Line"))
+                else if (colorToChange.equalsIgnoreCase("Line"))
                     Fields.lineColor = JColorChooser.showDialog(frame, "Choose Line Color", Fields.lineColor);
-                else if(colorToChange.equalsIgnoreCase("Background"))
+                else if (colorToChange.equalsIgnoreCase("Background"))
                     Fields.bgColor = JColorChooser.showDialog(frame, "Choose Background Color", Fields.bgColor);
                 board.repaint();
+                if (Fields.currPlayer == 1) {
+                    optionsPanel.setBackground(Fields.whiteColor);
+                } else {
+                    optionsPanel.setBackground(Fields.blackColor);
+                }
             }
         });
     }
@@ -190,7 +284,7 @@ public class Game {
         try {
             currentJar = new File(Game.class.getProtectionDomain().getCodeSource().getLocation().toURI());
               /* is it a jar file? */
-            if(!currentJar.getName().endsWith(".jar"))
+            if (!currentJar.getName().endsWith(".jar"))
                 return;
 
             /* Build command: java -jar application.jar */

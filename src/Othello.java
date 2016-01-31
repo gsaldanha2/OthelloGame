@@ -40,18 +40,22 @@ public class Othello {
                     player1Score++;
             }
         }
+        int player2Score = 0;
+        for (int r = 0; r < board.getBoardHeight(); r++) {
+            for (int c = 0; c < board.getBoardWidth(); c++) {
+                if (board.getPieceAt(r, c) == Fields.BLACK)
+                    player2Score++;
+            }
+        }
         if(player1Score > 32) {
-            System.out.println("Player 1 Wins");
             Game.gameOverLabel.setText("Game Over! Player 1 Wins");
         }else if(player1Score == 32) {
-            System.out.println("Tie");
             Game.gameOverLabel.setText("Game Over! Draw");
         }else {
-            System.out.println("Player 2 Wins");
             Game.gameOverLabel.setText("Game Over! Player 2 Wins");
         }
         System.out.println("Player 1 Score: " + player1Score);
-        System.out.println("Player 2 Score: " + (64 - player1Score));
+        System.out.println("Player 2 Score: " + player2Score);
         return true;
     }
 

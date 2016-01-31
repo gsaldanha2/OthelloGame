@@ -29,7 +29,7 @@ public class Board extends JPanel {
         humanPlayer = new HumanPlayer(othello);
         humanPlayer2 = new HumanPlayer(othello);
         cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
-        cpuPlayerOpp = new ComputerPlayer(othello, 1,Fields.difficulty);
+        cpuPlayerOpp = new ComputerPlayer(othello, 1,Fields.difficultyOpp);
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {

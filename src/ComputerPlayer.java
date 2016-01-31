@@ -28,13 +28,13 @@ public class ComputerPlayer {
             System.out.println("No legal moves");
             return;
         }
-        if(Fields.minimax) {
+        if(Fields.useMinimax()) {
             Move bestMove = minimax(board);
             makeMove(bestMove, board, max);
-        }else if(Fields.random) {
+        }else if(Fields.useRandom()) {
             Move move = random(board);
             makeMove(move, board, max);
-        }else if(Fields.casual) {
+        }else if(Fields.useCasual()) {
             Move move = casual(board);
             makeMove(move, board, max);
         }
@@ -42,7 +42,7 @@ public class ComputerPlayer {
 
     public Move random(Board board) {
         ArrayList<Move> moves = othello.getAllMoves(max, board);
-        if(Fields.corners) {
+        if(Fields.useCorners()) {
             for (Move move : moves) {
                 int row = move.row;
                 int col = move.col;
@@ -66,8 +66,7 @@ public class ComputerPlayer {
                 bestIndex = moves.indexOf(move);
                 int row = move.row;
                 int col = move.col;
-                if(Fields.corners && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
-                    System.out.println("GRABBING CORNER");
+                if(Fields.useCorners() && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
                     break;
                 }
             }
@@ -112,7 +111,7 @@ public class ComputerPlayer {
                 bestIndex = boards.indexOf(board);
                 int row = moves.get(bestIndex).row;
                 int col = moves.get(bestIndex).col;
-                if(Fields.corners && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+                if(Fields.useCorners() && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
                     System.out.println("GRABBING CORNER");
                     break;
                 }
