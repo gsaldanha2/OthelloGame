@@ -42,10 +42,13 @@ public class Othello {
         }
         if(player1Score > 32) {
             System.out.println("Player 1 Wins");
+            Game.gameOverLabel.setText("Game Over! Player 1 Wins");
         }else if(player1Score == 32) {
             System.out.println("Tie");
+            Game.gameOverLabel.setText("Game Over! Draw");
         }else {
             System.out.println("Player 2 Wins");
+            Game.gameOverLabel.setText("Game Over! Player 2 Wins");
         }
         System.out.println("Player 1 Score: " + player1Score);
         System.out.println("Player 2 Score: " + (64 - player1Score));

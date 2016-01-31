@@ -12,7 +12,7 @@ public class Game {
     private JFrame frame, startFrame;
     private Board board;
     public static JPanel optionsPanel;
-    public static JLabel scoreLabel;
+    public static JLabel scoreLabel, gameOverLabel;
     private final String[] levels = {"Easy", "Medium", "Hard", "Insane"};
 
     public static void main(String[] args) {
@@ -63,10 +63,16 @@ public class Game {
     }
 
     public void startGame() {
-        scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score);
+        scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + 60);
+        gameOverLabel = new JLabel("Running");
+        JButton changeColors = new JButton("Colors");
+        final JComboBox colorSelector = new JComboBox(new String[] {"P1", "P2", "Line", "Background"});
         optionsPanel = new JPanel();
+        optionsPanel.setPreferredSize(new Dimension(150, 300));
         optionsPanel.add(scoreLabel);
-        optionsPanel.setPreferredSize(new Dimension(200, 300));
+        optionsPanel.add(gameOverLabel);
+        optionsPanel.add(colorSelector);
+        optionsPanel.add(changeColors);
         optionsPanel.setBackground(Fields.whiteColor);
         JFrame optionsFrame = new JFrame();
         optionsFrame.setTitle("Game Info");
@@ -77,9 +83,10 @@ public class Game {
         optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         optionsFrame.setVisible(true);
 
-        System.out.println("Difficulty: " + Fields.difficulty);
-
+        //create the board
         board = new Board(8, 8, 86);
+
+        System.out.println("Difficulty: " + Fields.difficulty);
 
         frame = new JFrame();
         frame.setTitle("Othello Steam");
@@ -89,6 +96,22 @@ public class Game {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        changeColors.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String colorToChange = colorSelector.getSelectedItem().toString();
+                if(colorToChange.equalsIgnoreCase("P1"))
+                    Fields.whiteColor = JColorChooser.showDialog(frame, "Choose Player 1 Color", Fields.whiteColor);
+                else if(colorToChange.equalsIgnoreCase("P2"))
+                    Fields.blackColor = JColorChooser.showDialog(frame, "Choose Player 2 Color", Fields.blackColor);
+                else if(colorToChange.equalsIgnoreCase("Line"))
+                    Fields.lineColor = JColorChooser.showDialog(frame, "Choose Line Color", Fields.lineColor);
+                else if(colorToChange.equalsIgnoreCase("Background"))
+                    Fields.bgColor = JColorChooser.showDialog(frame, "Choose Background Color", Fields.bgColor);
+                board.repaint();
+            }
+        });
     }
 
 }

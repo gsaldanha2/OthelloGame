@@ -72,6 +72,7 @@ public class Board extends JPanel {
                 othello.updateScore(board);
                 repaint();
                 moving = false;
+                othello.gameEnded(board);
             }
         }
     }
@@ -79,7 +80,6 @@ public class Board extends JPanel {
         if (!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
-
                 cpuPlayerOpp.move(board);
                 Fields.currPlayer = Fields.BLACK;
                 Game.optionsPanel.setBackground(Fields.blackColor);
