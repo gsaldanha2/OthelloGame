@@ -89,7 +89,9 @@ public class ComputerPlayer {
     }
     
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
-        
+        for(Move currMove : moves) {
+            Node currNode = new Node()
+        }
     }
 
     //old code
