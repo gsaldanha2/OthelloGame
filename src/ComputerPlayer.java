@@ -30,13 +30,13 @@ public class ComputerPlayer {
         }
         if(Fields.useMinimax()) {
             Move bestMove = minimax(board);
-            makeMove(bestMove, board, max);
+            board.makeMove(bestMove, max);
         }else if(Fields.useRandom()) {
             Move move = random(board);
-            makeMove(move, board, max);
+            board.makeMove(move, max);
         }else if(Fields.useCasual()) {
             Move move = casual(board);
-            makeMove(move, board, max);
+            board.makeMove(move, max);
         }
     }
 
@@ -74,11 +74,6 @@ public class ComputerPlayer {
 
         return moves.get(bestIndex);
     }
-
-    public void makeMove(Move move, Board board, int piece) {
-        board.setPiece(move, piece);
-        othello.flipPieces(othello.getFlips(move, piece, board), piece, board);
-    }
     
     public Move lookAhead(Board board) {
         
@@ -90,48 +85,52 @@ public class ComputerPlayer {
     
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
         for(Move currMove : moves) {
-            Node currNode = new Node()
+            Node currNode = new Node(root, currMove);
+            root.addChild(currNode);
+            
+            Board tempBoard = board.cloneBoard();
+            othello.move()
         }
     }
 
-    //old code
-    public Move minimax(Board orgBoard) {
-        ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
-        ArrayList<Board> boards = new ArrayList<Board>();
+    // //old code
+    // public Move minimax(Board orgBoard) {
+    //     ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
+    //     ArrayList<Board> boards = new ArrayList<Board>();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(moves.size());
-        List<Future<Board>> list = new ArrayList<Future<Board>>();
+    //     ExecutorService executorService = Executors.newFixedThreadPool(moves.size());
+    //     List<Future<Board>> list = new ArrayList<Future<Board>>();
 
-        for(Move move : moves) {
-            Callable<Board> callable = new MinimaxProcessor(move, this, othello, orgBoard, min, max, maxDepth);
-            Future<Board> future = executorService.submit(callable);
-            list.add(future);
-        }
-        executorService.shutdown();
+    //     for(Move move : moves) {
+    //         Callable<Board> callable = new MinimaxProcessor(move, this, othello, orgBoard, min, max, maxDepth);
+    //         Future<Board> future = executorService.submit(callable);
+    //         list.add(future);
+    //     }
+    //     executorService.shutdown();
 
-        for(Future<Board> fut : list) {
-            try {
-                Board board = fut.get();
-                boards.add(board);
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        //threads finished
-        int bestValue = -1;
-        int bestIndex = -1;
-        for(Board board : boards) {
-            if (othello.evaluate(board, max) > bestValue) {
-                bestValue = othello.evaluate(board, max);
-                bestIndex = boards.indexOf(board);
-                int row = moves.get(bestIndex).row;
-                int col = moves.get(bestIndex).col;
-                if(Fields.useCorners() && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
-                    System.out.println("GRABBING CORNER");
-                    break;
-                }
-            }
-        }
-        return moves.get(bestIndex);
-    }
+    //     for(Future<Board> fut : list) {
+    //         try {
+    //             Board board = fut.get();
+    //             boards.add(board);
+    //         }catch (Exception e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
+    //     //threads finished
+    //     int bestValue = -1;
+    //     int bestIndex = -1;
+    //     for(Board board : boards) {
+    //         if (othello.evaluate(board, max) > bestValue) {
+    //             bestValue = othello.evaluate(board, max);
+    //             bestIndex = boards.indexOf(board);
+    //             int row = moves.get(bestIndex).row;
+    //             int col = moves.get(bestIndex).col;
+    //             if(Fields.useCorners() && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
+    //                 System.out.println("GRABBING CORNER");
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     return moves.get(bestIndex);
+    // }
 }
