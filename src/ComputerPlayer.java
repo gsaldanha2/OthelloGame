@@ -11,9 +11,11 @@ import java.util.concurrent.Future;
  */
 public class ComputerPlayer {
     private Othello othello;
-    private int maxDepth = 5;
+    private int maxLooks = 5;
     private int max = 2;
     private int min = 1;
+    private int looksAhead = 0;
+    private Node mainNode;
 
     public ComputerPlayer(Othello othello, int player, int d) {
         this.othello = othello;
@@ -24,7 +26,7 @@ public class ComputerPlayer {
 
     public void move(Board board) {
         //move ai
-        if (othello.getAllMoves(max, board).size() == 0) {
+        if (board.getAllMoves(max).size() == 0) {
             System.out.println("No legal moves");
             return;
         }
@@ -41,7 +43,7 @@ public class ComputerPlayer {
     }
 
     public Move random(Board board) {
-        ArrayList<Move> moves = othello.getAllMoves(max, board);
+        ArrayList<Move> moves = board.getAllMoves(max);
         if(Fields.useCorners()) {
             for (Move move : moves) {
                 int row = move.row;
@@ -56,7 +58,7 @@ public class ComputerPlayer {
     }
 
     public Move casual(Board board) {
-        ArrayList<Move> moves = othello.getAllMoves(max, board);
+        ArrayList<Move> moves = board.getAllMoves(max);
         int bestValue = -1;
         int bestIndex = -1;
         for(Move move : moves) {
@@ -79,17 +81,31 @@ public class ComputerPlayer {
         
     }
     
-    public void simMoves() {
+    //notes. node tree will now generate but the depth variable probably wont work just yet.
+    public void simMoves(Board board) {
+        looksAhead = 0;
+        mainNode = new Node();
         
+        ArrayList allMoves = board.getAllMoves(max);
+        if(allMoves.size() > 0) {
+            simMoves(mainNode, allMoves, board, max, min);
+        }
     }
     
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
-        for(Move currMove : moves) {
-            Node currNode = new Node(root, currMove);
-            root.addChild(currNode);
-            
-            Board tempBoard = board.cloneBoard();
-            othello.move()
+        if(++looksAhead < maxLooks) {
+            for(Move currMove : moves) {
+                Node currNode = new Node(root, currMove);
+                root.addChild(currNode);
+                //make move
+                Board tempBoard = board.cloneBoard();
+                tempBoard.makeMove(currMove, playerA);
+                //sim opponent move
+                ArrayList opponentMoves = tempBoard.getAllMoves(playerB);
+                if(opponentMoves.size() > 0) {
+                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA);
+                }
+            }
         }
     }
 
