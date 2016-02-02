@@ -9,6 +9,8 @@ public class Node {
     this.parent = parent;
   }
   
+  public Node() {}
+  
   public Move getMove() {
     return move;
   }
