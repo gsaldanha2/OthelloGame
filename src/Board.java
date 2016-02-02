@@ -61,6 +61,17 @@ public class Board extends JPanel {
         othello.flipPieces(othello.getFlips(move, piece, this), piece, this);
     }
     
+    public ArrayList<Move> getAllMoves(int piece) {
+        ArrayList<Move> moves = new ArrayList<Move>();
+        for (int r = 0; r < getBoardHeight(); r++) {
+            for (int c = 0; c < getBoardWidth(); c++) {
+                if (othello.isLegal(new Move(r, c), piece, this))
+                    moves.add(new Move(r, c));
+            }
+        }
+        return moves;
+    }
+    
     public void move(int row, int col, Board board) {
         if(!moving) {
             moving = true;
