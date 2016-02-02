@@ -55,6 +55,12 @@ public class Board extends JPanel {
             }
         });
     }
+    
+    public void makeMove(Move move, int piece) {
+        setPiece(move, piece);
+        othello.flipPieces(othello.getFlips(move, piece, this), piece, board);
+    }
+    
     public void move(int row, int col, Board board) {
         if(!moving) {
             moving = true;
