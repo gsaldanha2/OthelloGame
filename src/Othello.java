@@ -60,17 +60,6 @@ public class Othello {
         return true;
     }
 
-    public ArrayList<Move> getAllMoves(int piece, Board board) {
-        ArrayList<Move> moves = new ArrayList<Move>();
-        for (int r = 0; r < board.getBoardHeight(); r++) {
-            for (int c = 0; c < board.getBoardWidth(); c++) {
-                if (isLegal(new Move(r, c), piece, board))
-                    moves.add(new Move(r, c));
-            }
-        }
-        return moves;
-    }
-
     public int getValue(Move move, Board board, int piece) {
         return getFlips(move, piece, board).size();
     }
