@@ -79,7 +79,20 @@ public class ComputerPlayer {
         board.setPiece(move, piece);
         othello.flipPieces(othello.getFlips(move, piece, board), piece, board);
     }
+    
+    public Move lookAhead(Board board) {
+        
+    }
+    
+    public void simMoves() {
+        
+    }
+    
+    public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
+        
+    }
 
+    //old code
     public Move minimax(Board orgBoard) {
         ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
         ArrayList<Board> boards = new ArrayList<Board>();
