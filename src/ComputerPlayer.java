@@ -78,7 +78,8 @@ public class ComputerPlayer {
     }
     
     public Move lookAhead(Board board) {
-        
+        simMoves(board);
+        //start from leaves and move upwards
     }
     
     //notes. node tree will now generate but the depth variable probably wont work just yet.
@@ -93,18 +94,23 @@ public class ComputerPlayer {
     }
     
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
-        if(++looksAhead < maxLooks) {
-            for(Move currMove : moves) {
-                Node currNode = new Node(root, currMove);
-                root.addChild(currNode);
-                //make move
-                Board tempBoard = board.cloneBoard();
-                tempBoard.makeMove(currMove, playerA);
-                //sim opponent move
-                ArrayList opponentMoves = tempBoard.getAllMoves(playerB);
-                if(opponentMoves.size() > 0) {
-                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA);
-                }
+        if(playerA == min) {
+            looksAhead++;
+        }
+        
+        if((playerA == max) && !(looksAhead < maxLooks)) {
+            return;
+        }
+        for(Move currMove : moves) {
+           Node currNode = new Node(root, currMove);
+            root.addChild(currNode);
+            //make move
+            Board tempBoard = board.cloneBoard();
+            tempBoard.makeMove(currMove, playerA);
+            //sim opponent move
+            ArrayList opponentMoves = tempBoard.getAllMoves(playerB);
+            if(opponentMoves.size() > 0) {
+                this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA);
             }
         }
     }
