@@ -195,21 +195,21 @@ public class Game {
                 if (level.equalsIgnoreCase("easy"))
                     Fields.difficulty = 1;
                 else if (level.equalsIgnoreCase("medium"))
-                    Fields.difficulty = 2;
-                else if (level.equalsIgnoreCase("hard"))
-                    Fields.difficulty = 3;
-                else if (level.equalsIgnoreCase("insane"))
                     Fields.difficulty = 4;
+                else if (level.equalsIgnoreCase("hard"))
+                    Fields.difficulty = 6;
+                else if (level.equalsIgnoreCase("insane"))
+                    Fields.difficulty = 8;
 
                 level = diffCombo2.getSelectedItem().toString();
                 if (level.equalsIgnoreCase("easy"))
                     Fields.difficultyOpp = 1;
                 else if (level.equalsIgnoreCase("medium"))
-                    Fields.difficultyOpp = 2;
-                else if (level.equalsIgnoreCase("hard"))
-                    Fields.difficultyOpp = 3;
-                else if (level.equalsIgnoreCase("insane"))
                     Fields.difficultyOpp = 4;
+                else if (level.equalsIgnoreCase("hard"))
+                    Fields.difficultyOpp = 6;
+                else if (level.equalsIgnoreCase("insane"))
+                    Fields.difficultyOpp = 8;
 
                 startFrame.dispose();
                 startGame();

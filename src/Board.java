@@ -81,7 +81,9 @@ public class Board extends JPanel {
                     moving = false;
                     return;
                 }
-                humanPlayer.move(new Move(row, col), board);
+                if(board.getAllMoves(Fields.player).size() > 0) {
+                    humanPlayer.move(new Move(row, col), board);
+                }
                 Fields.currPlayer = Fields.BLACK;
                 Game.optionsPanel.setBackground(Fields.blackColor);
                 othello.updateScore(board);

@@ -79,37 +79,37 @@ public class ComputerPlayer {
         simMoves(board);
         //start from leaves and move upwards
         ArrayList<Node> leafNodes = new ArrayList<Node>();
-        for(Node node : children) {
-            if(node.getChildren().size() == 0) {
+        for (Node node : children) {
+            if (node.getChildren().size() == 0) {
                 leafNodes.add(node);
             }
         }
 
         ArrayList<ArrayList> rootMovesArray[] = new ArrayList[rootNodes.size()];
-        for(int i = 0; i < rootMovesArray.length; i++) {
+        for (int i = 0; i < rootMovesArray.length; i++) {
             rootMovesArray[i] = new ArrayList<ArrayList>();
         }
 
-        for(Node leaf : leafNodes) {
+        for (Node leaf : leafNodes) {
             Node currNode = leaf;
             Node parent = currNode.getParent();
             ArrayList<Move> allMoves = new ArrayList<Move>();
-            while(true) {
+            while (true) {
                 allMoves.add(currNode.getMove());
 
-                if(parent.getParent() != null) {
+                if (parent.getParent() != null) {
                     currNode = currNode.getParent();
                     parent = currNode.getParent();
-                }else {
+                } else {
                     break;
                 }
             }
 
             Collections.reverse(allMoves);
 
-            for(int i = 0; i < rootNodes.size(); i++) {
+            for (int i = 0; i < rootNodes.size(); i++) {
                 Node rootNode = rootNodes.get(i);
-                if(currNode.equals(rootNode)) {
+                if (currNode.equals(rootNode)) {
                     ArrayList<ArrayList> list = rootMovesArray[i];
                     list.add(allMoves);
                 }
@@ -118,29 +118,29 @@ public class ComputerPlayer {
 
         float bestEval = Float.MAX_VALUE;
         int bestIndex = -1;
-        for(int i = 0; i < rootMovesArray.length; i++) {
+        for (int i = 0; i < rootMovesArray.length; i++) {
             ArrayList<ArrayList> rootMovesList = rootMovesArray[i];
             float loses = 0;
             float totalBoards = 0;
-            for(ArrayList<Move> moveOrder : rootMovesList) {
+            for (ArrayList<Move> moveOrder : rootMovesList) {
                 int player = max;
                 Board temp = board.cloneBoard();
-                for(Move move : moveOrder) {
+                for (Move move : moveOrder) {
                     temp.makeMove(move, player);
                     player = (player == max) ? min : max;
                 }
                 loses += othello.evaluate(temp, max);
                 totalBoards++;
             }
-            float result = loses /totalBoards;
-            System.out.println("OOLOOOO - " + loses + ", " + totalBoards);
-            if(result < bestEval) {
+            float result = loses / totalBoards;
+//            System.out.println("OOLOOOO - " + loses + ", " + totalBoards);
+            if (result < bestEval) {
                 bestEval = result;
                 bestIndex = i;
             }
         }
 
-        System.out.println(bestEval);
+//        System.out.println(bestEval);
         return rootNodes.get(bestIndex).getMove();
     }
 
@@ -151,7 +151,7 @@ public class ComputerPlayer {
         children = new ArrayList<Node>();
         rootNodes = new ArrayList<Node>();
         ArrayList<Move> allMoves = board.getAllMoves(max);
-        for(Move move : allMoves) {
+        for (Move move : allMoves) {
             rootNodes.add(new Node(mainNode, move));
         }
         if (allMoves.size() > 0) {
@@ -159,15 +159,34 @@ public class ComputerPlayer {
         }
     }
 
+    public boolean isRootNode(Node node) {
+        for (Node rt : rootNodes) {
+            if (rt.equals(node)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
-//        if (playerA == min) {
-//            looksAhead++;
-//        }
-//
-//        if ((playerA == max) && (looksAhead >= maxLooks)) {
-//            return;
-//        }
-        if(++looksAhead < maxLooks) {
+        int depth = 0;
+        if(max == 2) {
+            depth = -1;
+        }
+        Node tempParent = parent;
+        while (true) {
+            if(tempParent.getMove() != null) {
+                depth++;
+                if(isRootNode(tempParent))
+                    break;
+                tempParent = tempParent.getParent();
+            }else {
+                break;
+            }
+        }
+        Collections.shuffle(allMoves);
+
+        if (depth < maxLooks) {
             for (Move currMove : allMoves) {
                 Node currNode = new Node(parent, currMove);
                 children.add(currNode);
