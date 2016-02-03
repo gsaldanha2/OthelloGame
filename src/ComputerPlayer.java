@@ -19,7 +19,7 @@ public class ComputerPlayer {
         this.othello = othello;
         this.max = player;
         min = (max == 1) ? 2 : 1;
-        looksAhead = d;
+        maxLooks = d;
     }
 
     public void move(Board board) {
@@ -116,11 +116,12 @@ public class ComputerPlayer {
             }
         }
 
-        int bestEval = Integer.MIN_VALUE;
+        float bestEval = Float.MAX_VALUE;
         int bestIndex = -1;
         for(int i = 0; i < rootMovesArray.length; i++) {
             ArrayList<ArrayList> rootMovesList = rootMovesArray[i];
-            int rootEval = 0;
+            float loses = 0;
+            float totalBoards = 0;
             for(ArrayList<Move> moveOrder : rootMovesList) {
                 int player = max;
                 Board temp = board.cloneBoard();
@@ -128,15 +129,18 @@ public class ComputerPlayer {
                     temp.makeMove(move, player);
                     player = (player == max) ? min : max;
                 }
-                int eval = othello.evaluate(temp, max);
-                rootEval += eval;
+                loses += othello.evaluate(temp, max);
+                totalBoards++;
             }
-            if(rootEval > bestEval) {
-                bestEval = rootEval;
+            float result = loses /totalBoards;
+            System.out.println("OOLOOOO - " + loses + ", " + totalBoards);
+            if(result < bestEval) {
+                bestEval = result;
                 bestIndex = i;
             }
         }
 
+        System.out.println(bestEval);
         return rootNodes.get(bestIndex).getMove();
     }
 
@@ -156,66 +160,27 @@ public class ComputerPlayer {
     }
 
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
-        if (playerA == min) {
-            looksAhead++;
-        }
-
-        if ((playerA == max) && !(looksAhead < maxLooks)) {
-            return;
-        }
-        for (Move currMove : allMoves) {
-            Node currNode = new Node(parent, currMove);
-            children.add(currNode);
-            parent.addChild(currNode);
-            //make move
-            Board tempBoard = board.cloneBoard();
-            tempBoard.makeMove(currMove, playerA);
-            //sim opponent move
-            ArrayList<Move> opponentMoves = tempBoard.getAllMoves(playerB);
-            if (opponentMoves.size() > 0) {
-                this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA);
+//        if (playerA == min) {
+//            looksAhead++;
+//        }
+//
+//        if ((playerA == max) && (looksAhead >= maxLooks)) {
+//            return;
+//        }
+        if(++looksAhead < maxLooks) {
+            for (Move currMove : allMoves) {
+                Node currNode = new Node(parent, currMove);
+                children.add(currNode);
+                parent.addChild(currNode);
+                //make move
+                Board tempBoard = board.cloneBoard();
+                tempBoard.makeMove(currMove, playerA);
+                //sim opponent move
+                ArrayList<Move> opponentMoves = tempBoard.getAllMoves(playerB);
+                if (opponentMoves.size() > 0) {
+                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA);
+                }
             }
         }
     }
-
-    // //old code
-    // public Move minimax(Board orgBoard) {
-    //     ArrayList<Move> moves = othello.getAllMoves(max, orgBoard);
-    //     ArrayList<Board> boards = new ArrayList<Board>();
-
-    //     ExecutorService executorService = Executors.newFixedThreadPool(moves.size());
-    //     List<Future<Board>> list = new ArrayList<Future<Board>>();
-
-    //     for(Move move : moves) {
-    //         Callable<Board> callable = new MinimaxProcessor(move, this, othello, orgBoard, min, max, maxDepth);
-    //         Future<Board> future = executorService.submit(callable);
-    //         list.add(future);
-    //     }
-    //     executorService.shutdown();
-
-    //     for(Future<Board> fut : list) {
-    //         try {
-    //             Board board = fut.get();
-    //             boards.add(board);
-    //         }catch (Exception e) {
-    //             e.printStackTrace();
-    //         }
-    //     }
-    //     //threads finished
-    //     int bestValue = -1;
-    //     int bestIndex = -1;
-    //     for(Board board : boards) {
-    //         if (othello.evaluate(board, max) > bestValue) {
-    //             bestValue = othello.evaluate(board, max);
-    //             bestIndex = boards.indexOf(board);
-    //             int row = moves.get(bestIndex).row;
-    //             int col = moves.get(bestIndex).col;
-    //             if(Fields.useCorners() && (col == 0 && (row == 0 || row == board.getBoardHeight()-1)) || (col == board.getBoardWidth() -1 && (row == 0 || row == board.getBoardHeight()-1))) { //corner bias
-    //                 System.out.println("GRABBING CORNER");
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     return moves.get(bestIndex);
-    // }
 }

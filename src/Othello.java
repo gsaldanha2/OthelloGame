@@ -13,15 +13,23 @@ public class Othello {
     public Othello() {
     }
 
-    public int evaluate(Board board, int player) {
+    public float evaluate(Board board, int player) {
         int player1Score = 0;
+        int player2Score = 0;
+        int player2 = (player == 1) ? 2 : 1;
         for (int r = 0; r < board.getBoardHeight(); r++) {
             for (int c = 0; c < board.getBoardWidth(); c++) {
                 if (board.getPieceAt(r, c) == player)
                     player1Score++;
+                if(board.getPieceAt(r, c) == player2) {
+                    player2Score++;
+                }
             }
         }
-        return player1Score;
+        System.out.println("PLAYER@ : " + player1Score + "," + player2Score);
+        if(player2Score > player1Score)
+            return +1f;
+        return 0f;
     }
 
     public boolean gameEnded(Board board) {
