@@ -170,9 +170,6 @@ public class ComputerPlayer {
 
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
         int depth = 0;
-        if(max == 2) {
-            depth = -1;
-        }
         Node tempParent = parent;
         while (true) {
             if(tempParent.getMove() != null) {

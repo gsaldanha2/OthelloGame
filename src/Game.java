@@ -193,17 +193,17 @@ public class Game {
 
                 String level = diffCombo1.getSelectedItem().toString();
                 if (level.equalsIgnoreCase("easy"))
-                    Fields.difficulty = 1;
+                    Fields.difficulty = 3;
                 else if (level.equalsIgnoreCase("medium"))
-                    Fields.difficulty = 4;
+                    Fields.difficulty = 5;
                 else if (level.equalsIgnoreCase("hard"))
-                    Fields.difficulty = 6;
+                    Fields.difficulty = 7;
                 else if (level.equalsIgnoreCase("insane"))
-                    Fields.difficulty = 8;
+                    Fields.difficulty = 9;
 
                 level = diffCombo2.getSelectedItem().toString();
                 if (level.equalsIgnoreCase("easy"))
-                    Fields.difficultyOpp = 1;
+                    Fields.difficultyOpp = 2;
                 else if (level.equalsIgnoreCase("medium"))
                     Fields.difficultyOpp = 4;
                 else if (level.equalsIgnoreCase("hard"))
