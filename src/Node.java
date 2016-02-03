@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Node {
 
   private Node parent = null;
-  private List<Node> children = new List<Node>;
+  private List<Node> children = new ArrayList<Node>();
   private Move move = null;
   
   public Node(Node parent, Move move) {
@@ -10,12 +13,21 @@ public class Node {
   }
   
   public Node() {}
-  
-  public Move getMove() {
+
+    @Override
+    public boolean equals(Object obj) {
+        Node n2 = (Node) obj;
+        if((n2.getMove().row == this.getMove().row) && (n2.getMove().col == this.getMove().col)) {
+            return true;
+        }
+        return false;
+    }
+
+    public Move getMove() {
     return move;
   }
   
-  public Parent getParent() {
+  public Node getParent() {
     return parent;
   }
 
