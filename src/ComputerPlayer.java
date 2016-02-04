@@ -153,35 +153,15 @@ public class ComputerPlayer {
             rootNodes.add(new Node(mainNode, move));
         }
         if (allMoves.size() > 0) {
-            simMoves(mainNode, allMoves, board, max, min);
+            simMoves(mainNode, allMoves, board, max, min, maxLooks);
         }
+//        System.out.println(children.size());
     }
 
-    public boolean isRootNode(Node node) {
-        for (Node rt : rootNodes) {
-            if (rt.equals(node)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB) {
-        int depth = 0;
-        Node tempParent = parent;
-        while (true) {
-            if(tempParent.getMove() != null) {
-                depth++;
-                if(isRootNode(tempParent))
-                    break;
-                tempParent = tempParent.getParent();
-            }else {
-                break;
-            }
-        }
+    public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB, int depth) {
         Collections.shuffle(allMoves);
-
-        if (depth < maxLooks) {
+        //System.out.println(children.size());
+        if (depth > 0) {
             for (Move currMove : allMoves) {
                 Node currNode = new Node(parent, currMove);
                 children.add(currNode);
@@ -192,7 +172,7 @@ public class ComputerPlayer {
                 //sim opponent move
                 ArrayList<Move> opponentMoves = tempBoard.getAllMoves(playerB);
                 if (opponentMoves.size() > 0) {
-                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA);
+                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA, depth-1);
                 }
             }
         }
