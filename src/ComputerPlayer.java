@@ -10,7 +10,6 @@ public class ComputerPlayer {
     private int maxLooks = 5;
     private int max = 2;
     private int min = 1;
-    private int looksAhead = 0;
     private Node mainNode;
     private ArrayList<Node> children;
     private ArrayList<Node> rootNodes;
@@ -146,7 +145,6 @@ public class ComputerPlayer {
 
     //notes. node tree will now generate but the depth variable probably wont work just yet.
     public void simMoves(Board board) {
-        looksAhead = 0;
         mainNode = new Node();
         children = new ArrayList<Node>();
         rootNodes = new ArrayList<Node>();
