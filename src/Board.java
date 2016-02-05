@@ -30,7 +30,7 @@ public class Board extends JPanel {
         humanPlayer = new HumanPlayer(othello);
         humanPlayer2 = new HumanPlayer(othello);
         cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
-        cpuPlayerOpp = new ComputerPlayer(othello, 1,Fields.difficultyOpp);
+        cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficultyOpp);
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {
@@ -41,27 +41,43 @@ public class Board extends JPanel {
                 final int x = e.getX() / tileSize;
                 final int y = e.getY() / tileSize;
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(Fields.playType == 1) {
-                            move(y, x, Board.this);
-                        }else if(Fields.playType == 2) {
-                            twoPlayerMove(y, x, Board.this);
-                        }else {
-                            move(Board.this);
+                if (y < getBoardHeight() && x < getBoardWidth()) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (Fields.playType == 1) {
+                                move(y, x, Board.this);
+                            } else if (Fields.playType == 2) {
+                                twoPlayerMove(y, x, Board.this);
+                            } else {
+                                move(Board.this);
+                            }
                         }
-                    }
-                }).start();
+                    }).start();
+                }
             }
         });
     }
-    
+
     public void makeMove(Move move, int piece) {
         setPiece(move, piece);
         othello.flipPieces(othello.getFlips(move, piece, this), piece, this);
     }
-    
+
+    public boolean isNew() {
+        int p1 = 0, p2 = 0;
+        for (int r = 0; r < getBoardHeight(); r++) {
+            for (int c = 0; c < getBoardWidth(); c++) {
+                if (getPieceAt(r, c) == Fields.WHITE)
+                    p1++;
+                else if (getPieceAt(r, c) == Fields.BLACK)
+                    p2++;
+            }
+        }
+        System.out.println(p1 + "," + p2);
+        return (p1 == 4) && (p2 == 1);
+    }
+
     public ArrayList<Move> getAllMoves(int piece) {
         ArrayList<Move> moves = new ArrayList<Move>();
         for (int r = 0; r < getBoardHeight(); r++) {
@@ -72,16 +88,16 @@ public class Board extends JPanel {
         }
         return moves;
     }
-    
+
     public void move(int row, int col, Board board) {
-        if(!moving) {
+        if (!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
-                if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
-                    moving = false;
-                    return;
-                }
-                if(board.getAllMoves(Fields.player).size() > 0) {
+                if (board.getAllMoves(Fields.currPlayer).size() > 0) {
+                    if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
+                        moving = false;
+                        return;
+                    }
                     humanPlayer.move(new Move(row, col), board);
                 }
                 Fields.currPlayer = Fields.BLACK;
@@ -93,21 +109,21 @@ public class Board extends JPanel {
                 Game.optionsPanel.setBackground(Fields.whiteColor);
                 othello.updateScore(board);
                 repaint();
-                moving = false;
                 othello.gameEnded(board);
             }
         }
+        moving = false;
     }
 
     public void twoPlayerMove(int row, int col, Board board) {
-        if(!moving) {
+        if (!moving) {
             moving = true;
             if (!othello.gameEnded(board)) {
                 if (!othello.isLegal(new Move(row, col), Fields.currPlayer, board)) {
                     moving = false;
                     return;
                 }
-                if(Fields.currPlayer == 1)
+                if (Fields.currPlayer == 1)
                     humanPlayer.move(new Move(row, col), board);
                 else
                     humanPlayer.move(new Move(row, col), board);

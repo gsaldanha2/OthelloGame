@@ -27,6 +27,15 @@ public class ComputerPlayer {
             System.out.println("No legal moves");
             return;
         }
+
+        //make random move if first move
+        if(board.isNew()) {
+            System.out.println("Board is new");
+            Move move = random(board);
+            board.makeMove(move, max);
+            return;
+        }
+
         if (Fields.useMinimax()) {
             Move bestMove = lookAhead(board);
             board.makeMove(bestMove, max);
@@ -137,6 +146,10 @@ public class ComputerPlayer {
                 bestEval = result;
                 bestIndex = i;
             }
+        }
+
+        if(bestIndex == -1) {
+            return rootNodes.get(0).getMove();
         }
 
 //        System.out.println(bestEval);
