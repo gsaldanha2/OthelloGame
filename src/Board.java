@@ -14,8 +14,9 @@ public class Board extends JPanel {
     private int tileSize;
     private boolean moving = false;
     private int[][] board;
-    private HumanPlayer humanPlayer, humanPlayer2;
+    private HumanPlayer humanPlayer;
     private ComputerPlayer cpuPlayer, cpuPlayerOpp;
+    private int legalTileSize;
 
     private Othello othello;
 
@@ -24,11 +25,11 @@ public class Board extends JPanel {
         this.height = height;
         this.tileSize = tileSize;
         this.board = new int[width][height];
+        legalTileSize = tileSize/4;
         initializeBoard();
 
         othello = new Othello();
         humanPlayer = new HumanPlayer(othello);
-        humanPlayer2 = new HumanPlayer(othello);
         cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
         cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficultyOpp);
 
@@ -168,7 +169,7 @@ public class Board extends JPanel {
         g.setColor(Fields.lineColor);
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < height; col++) {
-                g.drawRect(row * tileSize, col * tileSize, tileSize, tileSize);
+                g.drawRect(col * tileSize, row * tileSize, tileSize, tileSize);
             }
         }
 
@@ -179,6 +180,13 @@ public class Board extends JPanel {
                 else if (getPieceAt(row, col) == Fields.BLACK) g.setColor(Fields.blackColor);
                 else continue;
                 g.fillOval(col * tileSize, row * tileSize, tileSize, tileSize);
+            }
+        }
+
+        if(Game.showLegalMoves.isSelected()) {
+            g.setColor(Color.RED);
+            for (Move legalMove : getAllMoves(Fields.currPlayer)) {
+                g.fillOval(legalMove.col * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalMove.row * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalTileSize, legalTileSize);
             }
         }
     }

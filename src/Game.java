@@ -22,6 +22,7 @@ public class Game {
     private Board board;
     public static JPanel optionsPanel;
     public static JLabel scoreLabel, gameOverLabel;
+    public static JCheckBox showLegalMoves;
     private final String[] levels = {"Easy", "Medium", "Hard", "Insane"};
 
     public static void main(String[] args) {
@@ -220,6 +221,7 @@ public class Game {
     public void startGame() {
         scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + 60);
         gameOverLabel = new JLabel("Running");
+        showLegalMoves = new JCheckBox("Show Legal Moves", true);
         JButton changeColors = new JButton("Change Color");
         JButton giveUp = new JButton("Give up");
         giveUp.setBackground(Color.yellow);
@@ -230,6 +232,7 @@ public class Game {
         optionsPanel.setPreferredSize(new Dimension(150, 300));
         optionsPanel.add(scoreLabel);
         optionsPanel.add(gameOverLabel);
+        optionsPanel.add(showLegalMoves);
         optionsPanel.add(colorSelector);
         optionsPanel.add(changeColors);
         optionsPanel.add(giveUp);
@@ -290,6 +293,13 @@ public class Game {
                     optionsPanel.setBackground(Fields.blackColor);
                 }
                 ColorHandler.saveColorData();
+            }
+        });
+
+        showLegalMoves.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.repaint();
             }
         });
     }
