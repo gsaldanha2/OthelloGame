@@ -74,7 +74,6 @@ public class Board extends JPanel {
                     p2++;
             }
         }
-        System.out.println(p1 + "," + p2);
         return (p1 == 4) && (p2 == 1);
     }
 

@@ -244,8 +244,10 @@ public class Game {
         optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         optionsFrame.setVisible(true);
 
+        ColorHandler.readColorData();
         //create the board
         board = new Board(8, 8, 86);
+        System.out.println(ColorHandler.toHexString(Fields.bgColor));
 
         System.out.println("Difficulty: " + Fields.difficulty);
 
@@ -287,6 +289,7 @@ public class Game {
                 } else {
                     optionsPanel.setBackground(Fields.blackColor);
                 }
+                ColorHandler.saveColorData();
             }
         });
     }
