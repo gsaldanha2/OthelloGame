@@ -1,3 +1,5 @@
+package com.game.othello;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -110,6 +112,9 @@ public class Board extends JPanel {
                 othello.updateScore(board);
                 repaint();
                 othello.gameEnded(board);
+                if(board.getAllMoves(Fields.currPlayer).size() == 0) {
+                    move(0, 0, board);
+                }
             }
         }
         moving = false;
@@ -123,12 +128,14 @@ public class Board extends JPanel {
                     moving = false;
                     return;
                 }
-                if (Fields.currPlayer == 1)
+                if (Fields.currPlayer == 1) {
                     humanPlayer.move(new Move(row, col), board);
-                else
+                    Game.optionsPanel.setBackground(Fields.blackColor);
+                }else{
                     humanPlayer.move(new Move(row, col), board);
+                    Game.optionsPanel.setBackground(Fields.whiteColor);
+                }
                 Fields.currPlayer = (Fields.currPlayer == Fields.BLACK) ? Fields.WHITE : Fields.BLACK;
-                Game.optionsPanel.setBackground(Fields.blackColor);
                 othello.updateScore(board);
                 repaint();
                 moving = false;
@@ -214,28 +221,12 @@ public class Board extends JPanel {
         return temp;
     }
 
-    public int evaluateBoard(int piece) {
-        int output = 0;
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                if (getPieceAt(row, col) == piece) {
-                    output++;
-                }
-            }
-        }
-        return output;
-    }
-
     public void setPiece(Move move, int piece) {
         board[move.row][move.col] = piece;
     }
 
     public void setPiece(int row, int col, int piece) {
         board[row][col] = piece;
-    }
-
-    public int getPieceAt(Move move) {
-        return board[move.row][move.col];
     }
 
     public int getPieceAt(int row, int col) {

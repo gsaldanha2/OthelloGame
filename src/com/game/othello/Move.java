@@ -1,3 +1,5 @@
+package com.game.othello;
+
 /**
  * Created by Gregory on 1/18/2016.
  */

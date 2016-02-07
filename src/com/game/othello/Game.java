@@ -1,4 +1,4 @@
-import javafx.embed.swing.JFXPanel;
+package com.game.othello;
 
 import javax.swing.*;
 import java.awt.*;
@@ -255,7 +255,7 @@ public class Game {
         System.out.println("Difficulty: " + Fields.difficulty);
 
         frame = new JFrame();
-        frame.setTitle("Othello Steam");
+        frame.setTitle("JOthello - Copyright Gregory Saldanha 2016");
         frame.setResizable(false);
         frame.add(board);
         frame.pack();

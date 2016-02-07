@@ -1,3 +1,5 @@
+package com.game.othello;
+
 import java.awt.*;
 
 /**

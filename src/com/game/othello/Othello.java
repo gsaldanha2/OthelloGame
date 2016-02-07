@@ -1,3 +1,5 @@
+package com.game.othello;
+
 import java.util.ArrayList;
 
 /**
@@ -11,6 +13,17 @@ public class Othello {
             {1, -1}, {1, 0}, {1, 1}};
 
     public Othello() {
+    }
+
+    public int getBoardPieces(Board board) {
+        int pieces = 0;
+        for (int r = 0; r < board.getBoardHeight(); r++) {
+            for (int c = 0; c < board.getBoardWidth(); c++) {
+                if (board.getPieceAt(r, c) != Fields.EMPTY)
+                    pieces++;
+            }
+        }
+        return pieces;
     }
 
     public float evaluate(Board board, int player) {

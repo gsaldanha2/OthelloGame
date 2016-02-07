@@ -1,3 +1,5 @@
+package com.game.othello;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -7,11 +9,11 @@ import java.util.Random;
  */
 public class ComputerPlayer {
     private Othello othello;
-    private int maxLooks = 5;
+    private int maxLooks = 5, maxDepth = 5;
     private int max = 2;
     private int min = 1;
     private Node mainNode;
-    private ArrayList<Node> children;
+    public static ArrayList<Node> children;
     private ArrayList<Node> rootNodes;
 
     public ComputerPlayer(Othello othello, int player, int d) {
@@ -19,6 +21,7 @@ public class ComputerPlayer {
         this.max = player;
         min = (max == 1) ? 2 : 1;
         maxLooks = d;
+        maxDepth = d;
     }
 
     public void move(Board board) {
@@ -30,7 +33,6 @@ public class ComputerPlayer {
 
         //make random move if first move
         if(board.isNew()) {
-            System.out.println("Board is new");
             Move move = random(board);
             board.makeMove(move, max);
             return;
@@ -141,7 +143,7 @@ public class ComputerPlayer {
                 totalBoards++;
             }
             float result = loses / totalBoards;
-//            System.out.println("OOLOOOO - " + loses + ", " + totalBoards);
+//            System.out.println(loses + ", " + totalBoards);
             if (result < bestEval) {
                 bestEval = result;
                 bestIndex = i;
@@ -156,11 +158,16 @@ public class ComputerPlayer {
         return rootNodes.get(bestIndex).getMove();
     }
 
-    //notes. node tree will now generate but the depth variable probably wont work just yet.
     public void simMoves(Board board) {
         mainNode = new Node();
         children = new ArrayList<Node>();
         rootNodes = new ArrayList<Node>();
+        if((othello.getBoardPieces(board) < 12) && (max == 2)) {
+            maxLooks = maxDepth-1;
+        }else {
+            maxLooks = maxDepth;
+        }
+        System.out.println(maxLooks);
         ArrayList<Move> allMoves = board.getAllMoves(max);
         for (Move move : allMoves) {
             rootNodes.add(new Node(mainNode, move));
@@ -168,7 +175,6 @@ public class ComputerPlayer {
         if (allMoves.size() > 0) {
             simMoves(mainNode, allMoves, board, max, min, maxLooks);
         }
-//        System.out.println(children.size());
     }
 
     public void simMoves(Node parent, ArrayList<Move> allMoves, Board board, int playerA, int playerB, int depth) {

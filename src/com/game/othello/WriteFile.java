@@ -1,3 +1,5 @@
+package com.game.othello;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
