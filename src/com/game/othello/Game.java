@@ -219,6 +219,7 @@ public class Game {
     }
 
     public void startGame() {
+        ColorHandler.readColorData();
         scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + 60);
         gameOverLabel = new JLabel("Running");
         showLegalMoves = new JCheckBox("Show Legal Moves", true);
@@ -247,10 +248,8 @@ public class Game {
         optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         optionsFrame.setVisible(true);
 
-        ColorHandler.readColorData();
         //create the board
         board = new Board(8, 8, 86);
-        System.out.println(ColorHandler.toHexString(Fields.bgColor));
 
         System.out.println("Difficulty: " + Fields.difficulty);
 
@@ -302,7 +301,6 @@ public class Game {
                 board.repaint();
             }
         });
-        board.move(board);
     }
 
     public static void restart() {

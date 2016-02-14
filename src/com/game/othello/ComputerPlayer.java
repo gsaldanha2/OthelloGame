@@ -117,11 +117,11 @@ public class ComputerPlayer {
             }
         }
 
-        float bestEval = Float.MAX_VALUE;
+        float bestEval = Float.MIN_VALUE;
         int bestIndex = -1;
         for (int i = 0; i < rootMovesArray.length; i++) {
             ArrayList<ArrayList> rootMovesList = rootMovesArray[i];
-            float loses = 0;
+            float wins = 0;
             float totalBoards = 0;
             for (ArrayList<Move> moveOrder : rootMovesList) {
                 int player = max;
@@ -130,22 +130,22 @@ public class ComputerPlayer {
                     temp.makeMove(move, player);
                     player = (player == max) ? min : max;
                 }
-                loses += othello.evaluate(temp, max);
+                wins += othello.evaluate(temp, max);
                 totalBoards++;
             }
-            float result = loses / totalBoards;
-//            System.out.println(loses + ", " + totalBoards);
-            if (result < bestEval) {
+            float result = wins / totalBoards;
+            System.out.println(wins + ", " + totalBoards);
+            if (result > bestEval) {
                 bestEval = result;
                 bestIndex = i;
             }
         }
 
-        if(bestIndex == -1) {
+        if (bestIndex == -1) {
             return rootNodes.get(0).getMove();
         }
 
-//        System.out.println(bestEval);
+        System.out.println(bestEval);
         return rootNodes.get(bestIndex).getMove();
     }
 
@@ -157,13 +157,9 @@ public class ComputerPlayer {
         for (Move move : allMoves) {
             rootNodes.add(new Node(mainNode, move));
         }
-        System.out.println(max+ " | " + maxLooks);
+//        System.out.println(max+ " | " + maxLooks);
         if (allMoves.size() > 0) {
-            if(othello.getBoardPieces(board) < 14 && max == 2) {
-                simMoves(mainNode, allMoves, board, max, min, maxLooks+1);
-                System.out.println("EXTRA");
-            }else
-                simMoves(mainNode, allMoves, board, max, min, maxLooks);
+            simMoves(mainNode, allMoves, board, max, min, maxLooks);
         }
     }
 
@@ -181,7 +177,7 @@ public class ComputerPlayer {
                 //sim opponent move
                 ArrayList<Move> opponentMoves = tempBoard.getAllMoves(playerB);
                 if (opponentMoves.size() > 0) {
-                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA, depth-1);
+                    this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA, depth - 1);
                 }
             }
         }

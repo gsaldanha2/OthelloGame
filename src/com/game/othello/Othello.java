@@ -40,7 +40,7 @@ public class Othello {
             }
         }
 //        System.out.println("PLAYER: " + player1Score + "," + player2Score);
-        if(player2Score > player1Score)
+        if(player1Score > player2Score)
             return +1f;
         return 0f;
     }
