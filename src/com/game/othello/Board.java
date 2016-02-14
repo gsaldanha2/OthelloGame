@@ -27,15 +27,15 @@ public class Board extends JPanel {
         this.height = height;
         this.tileSize = tileSize;
         this.board = new int[width][height];
-        legalTileSize = tileSize/4;
+        legalTileSize = tileSize / 4;
         initializeBoard();
 
         othello = new Othello();
         humanPlayer = new HumanPlayer(othello);
-        if(Fields.playType == 0) {
+        if (Fields.playType == 0) {
             cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficultyOpp);
             cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficulty);
-        }else{
+        } else {
             cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
             cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficultyOpp);
         }
@@ -118,7 +118,7 @@ public class Board extends JPanel {
                 othello.updateScore(board);
                 repaint();
                 othello.gameEnded(board);
-                if(board.getAllMoves(Fields.currPlayer).size() == 0) {
+                if (board.getAllMoves(Fields.currPlayer).size() == 0) {
                     move(0, 0, board);
                 }
             }
@@ -137,7 +137,7 @@ public class Board extends JPanel {
                 if (Fields.currPlayer == 1) {
                     humanPlayer.move(new Move(row, col), board);
                     Game.optionsPanel.setBackground(Fields.blackColor);
-                }else{
+                } else {
                     humanPlayer.move(new Move(row, col), board);
                     Game.optionsPanel.setBackground(Fields.whiteColor);
                 }
@@ -166,7 +166,9 @@ public class Board extends JPanel {
                 repaint();
                 moving = false;
                 move(board);
-            }
+            }/*else {
+                DebugHandler.writeGameData(Fields.player1score, Fields.player2score);
+            }*/
         }
     }
 
@@ -196,7 +198,7 @@ public class Board extends JPanel {
             }
         }
 
-        if(Game.showLegalMoves.isSelected()) {
+        if (Game.showLegalMoves.isSelected()) {
             g.setColor(Color.RED);
             for (Move legalMove : getAllMoves(Fields.currPlayer)) {
                 g.fillOval(legalMove.col * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalMove.row * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalTileSize, legalTileSize);

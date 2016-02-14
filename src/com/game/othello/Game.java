@@ -302,9 +302,10 @@ public class Game {
                 board.repaint();
             }
         });
+        board.move(board);
     }
 
-    public void restart() {
+    public static void restart() {
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         final File currentJar;
         try {

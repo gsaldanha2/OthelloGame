@@ -30,13 +30,6 @@ public class ComputerPlayer {
             return;
         }
 
-        //make random move if first move
-        if(board.isNew()) {
-            Move move = random(board);
-            board.makeMove(move, max);
-            return;
-        }
-
         if (Fields.useMinimax()) {
             Move bestMove = lookAhead(board);
             board.makeMove(bestMove, max);

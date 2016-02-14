@@ -78,6 +78,9 @@ public class Othello {
         }
         System.out.println("Player 1 Score: " + player1Score);
         System.out.println("Player 2 Score: " + player2Score);
+
+        Fields.player1score = player1Score;
+        Fields.player2score = player2Score;
         return true;
     }
 
