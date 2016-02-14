@@ -32,8 +32,14 @@ public class Board extends JPanel {
 
         othello = new Othello();
         humanPlayer = new HumanPlayer(othello);
-        cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
-        cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficultyOpp);
+        if(Fields.playType == 0) {
+            cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficultyOpp);
+            cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficulty);
+        }else{
+            cpuPlayer = new ComputerPlayer(othello, 2, Fields.difficulty);
+            cpuPlayerOpp = new ComputerPlayer(othello, 1, Fields.difficultyOpp);
+        }
+
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
         this.addMouseListener(new MouseAdapter() {

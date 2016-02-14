@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class ComputerPlayer {
     private Othello othello;
-    private int maxLooks = 5, maxDepth = 5;
+    private int maxLooks = 5;
     private int max = 2;
     private int min = 1;
     private Node mainNode;
@@ -21,7 +21,6 @@ public class ComputerPlayer {
         this.max = player;
         min = (max == 1) ? 2 : 1;
         maxLooks = d;
-        maxDepth = d;
     }
 
     public void move(Board board) {
@@ -116,7 +115,6 @@ public class ComputerPlayer {
             }
 
             Collections.reverse(allMoves);
-
             for (int i = 0; i < rootNodes.size(); i++) {
                 Node rootNode = rootNodes.get(i);
                 if (currNode.equals(rootNode)) {
@@ -162,18 +160,17 @@ public class ComputerPlayer {
         mainNode = new Node();
         children = new ArrayList<Node>();
         rootNodes = new ArrayList<Node>();
-        if((othello.getBoardPieces(board) < 12) && (max == 2)) {
-            maxLooks = maxDepth-1;
-        }else {
-            maxLooks = maxDepth;
-        }
-        System.out.println(maxLooks);
         ArrayList<Move> allMoves = board.getAllMoves(max);
         for (Move move : allMoves) {
             rootNodes.add(new Node(mainNode, move));
         }
+        System.out.println(max+ " | " + maxLooks);
         if (allMoves.size() > 0) {
-            simMoves(mainNode, allMoves, board, max, min, maxLooks);
+            if(othello.getBoardPieces(board) < 14 && max == 2) {
+                simMoves(mainNode, allMoves, board, max, min, maxLooks+1);
+                System.out.println("EXTRA");
+            }else
+                simMoves(mainNode, allMoves, board, max, min, maxLooks);
         }
     }
 

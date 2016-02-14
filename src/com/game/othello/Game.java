@@ -255,7 +255,7 @@ public class Game {
         System.out.println("Difficulty: " + Fields.difficulty);
 
         frame = new JFrame();
-        frame.setTitle("JOthello - Copyright Gregory Saldanha 2016");
+        frame.setTitle("JOthello - Gregory Saldanha 2016");
         frame.setResizable(false);
         frame.add(board);
         frame.pack();
