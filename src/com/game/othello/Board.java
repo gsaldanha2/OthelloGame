@@ -109,12 +109,12 @@ public class Board extends JPanel {
                     humanPlayer.move(new Move(row, col), board);
                 }
                 Fields.currPlayer = Fields.BLACK;
-                Game.optionsPanel.setBackground(Fields.blackColor);
+                Game.currPlayerLabel.setBackground(Fields.blackColor);
                 othello.updateScore(board);
                 repaint();
                 cpuPlayer.move(board);
                 Fields.currPlayer = Fields.WHITE;
-                Game.optionsPanel.setBackground(Fields.whiteColor);
+                Game.currPlayerLabel.setBackground(Fields.whiteColor);
                 othello.updateScore(board);
                 repaint();
                 othello.gameEnded(board, true);
@@ -136,10 +136,10 @@ public class Board extends JPanel {
                 }
                 if (Fields.currPlayer == 1) {
                     humanPlayer.move(new Move(row, col), board);
-                    Game.optionsPanel.setBackground(Fields.blackColor);
+                    Game.currPlayerLabel.setBackground(Fields.blackColor);
                 } else {
                     humanPlayer.move(new Move(row, col), board);
-                    Game.optionsPanel.setBackground(Fields.whiteColor);
+                    Game.currPlayerLabel.setBackground(Fields.whiteColor);
                 }
                 Fields.currPlayer = (Fields.currPlayer == Fields.BLACK) ? Fields.WHITE : Fields.BLACK;
                 othello.updateScore(board);
@@ -156,12 +156,12 @@ public class Board extends JPanel {
             if (!othello.gameEnded(board, true)) {
                 cpuPlayerOpp.move(board);
                 Fields.currPlayer = Fields.BLACK;
-                Game.optionsPanel.setBackground(Fields.blackColor);
+                Game.currPlayerLabel.setBackground(Fields.blackColor);
                 othello.updateScore(board);
                 repaint();
                 cpuPlayer.move(board);
                 Fields.currPlayer = Fields.WHITE;
-                Game.optionsPanel.setBackground(Fields.whiteColor);
+                Game.currPlayerLabel.setBackground(Fields.whiteColor);
                 othello.updateScore(board);
                 repaint();
                 moving = false;

@@ -15,10 +15,10 @@ public class Fields {
     public static int difficulty = 1, difficultyOpp = 1;
     public static int player = 1, ai = 2, currPlayer = 1;
     public static int player1score = 2, player2score = 2;
-    public static Color bgColor = Color.BLACK;
-    public static Color lineColor = Color.ORANGE;
-    public static Color whiteColor = Color.CYAN;
-    public static Color blackColor = Color.WHITE;
+    public static Color bgColor = new Color(0x2B7254);
+    public static Color lineColor = new Color(0x153A2E);
+    public static Color whiteColor = new Color(0x03041B);
+    public static Color blackColor = new Color(0xC8C9B1);
 
     public static boolean useMinimax() {
         if(playType == 1) {

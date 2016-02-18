@@ -35,14 +35,21 @@ public class ColorHandler {
             ReadFile file = new ReadFile(ColorHandler.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath() + "colorDataOthello.txt");
             String[] data = file.OpenFile(4);
 
-            Fields.bgColor = Color.decode(data[0]);
-            Fields.lineColor = Color.decode(data[1]);
-            Fields.whiteColor = Color.decode(data[2]);
-            Fields.blackColor = Color.decode(data[3]);
+            Color bgColor = Color.decode(data[0]);
+            Color lineColor = Color.decode(data[1]);
+            Color whiteColor = Color.decode(data[2]);
+            Color blackColor = Color.decode(data[3]);
+
+            Fields.bgColor = bgColor;
+            Fields.lineColor = lineColor;
+            Fields.whiteColor = whiteColor;
+            Fields.blackColor = blackColor;
         } catch (IOException e) {
             System.out.println("File not found - using defaults");
         } catch (URISyntaxException e) {
             e.printStackTrace();
+        } catch(NullPointerException e) {
+
         }
 
     }

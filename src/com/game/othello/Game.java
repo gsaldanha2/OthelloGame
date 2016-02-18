@@ -21,7 +21,7 @@ public class Game {
     private JFrame frame, startFrame;
     private Board board;
     public static JPanel optionsPanel;
-    public static JLabel scoreLabel, gameOverLabel;
+    public static JLabel scoreLabel, gameOverLabel, currPlayerLabel;
     public static JCheckBox showLegalMoves;
     private final String[] levels = {"Easy", "Medium", "Hard", "Insane"};
 
@@ -222,6 +222,11 @@ public class Game {
         ColorHandler.readColorData();
         scoreLabel = new JLabel("Score: " + Fields.player1score + " | " + Fields.player2score + " | Empty: " + 60);
         gameOverLabel = new JLabel("Running");
+        currPlayerLabel = new JLabel();
+        currPlayerLabel.setSize(new Dimension(150, 100));
+        currPlayerLabel.setOpaque(true);
+        currPlayerLabel.setBackground(Fields.whiteColor);
+
         showLegalMoves = new JCheckBox("Show Legal Moves", true);
         JButton changeColors = new JButton("Change Color");
         JButton giveUp = new JButton("Give up");
@@ -230,23 +235,14 @@ public class Game {
 
         optionsPanel = new JPanel();
         optionsPanel.setLayout(new GridLayout(0, 1));
-        optionsPanel.setPreferredSize(new Dimension(150, 300));
+        optionsPanel.setPreferredSize(new Dimension(150, 8*86));
+        optionsPanel.add(showLegalMoves);
         optionsPanel.add(scoreLabel);
         optionsPanel.add(gameOverLabel);
-        optionsPanel.add(showLegalMoves);
+        optionsPanel.add(currPlayerLabel);
         optionsPanel.add(colorSelector);
         optionsPanel.add(changeColors);
         optionsPanel.add(giveUp);
-        optionsPanel.setBackground(Fields.whiteColor);
-
-        final JFrame optionsFrame = new JFrame();
-        optionsFrame.setTitle("Game Info");
-        optionsFrame.setResizable(false);
-        optionsFrame.add(optionsPanel);
-        optionsFrame.pack();
-        optionsFrame.setLocation(1320, 300);
-        optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        optionsFrame.setVisible(true);
 
         //create the board
         board = new Board(8, 8, 86);
@@ -256,8 +252,10 @@ public class Game {
         frame = new JFrame();
         frame.setTitle("JOthello - Gregory Saldanha 2016");
         frame.setResizable(false);
-        frame.add(board);
-        frame.pack();
+        frame.setSize(8 * 87 + 150, 8 * 90);
+        frame.getContentPane().setLayout(new BorderLayout());
+        frame.getContentPane().add(board, BorderLayout.CENTER);
+        frame.getContentPane().add(optionsPanel, BorderLayout.EAST);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

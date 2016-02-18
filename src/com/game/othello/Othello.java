@@ -70,14 +70,12 @@ public class Othello {
         if(show) {
             int boardsize = board.getBoardHeight() * board.getBoardWidth();
             if (player1Score > boardsize / 2) {
-                Game.gameOverLabel.setText("Game Over! Player 1 Wins");
+                Game.gameOverLabel.setText("Player 1 Wins");
             } else if (player1Score == boardsize / 2) {
-                Game.gameOverLabel.setText("Game Over! Draw");
+                Game.gameOverLabel.setText("Draw");
             } else {
-                Game.gameOverLabel.setText("Game Over! Player 2 Wins");
+                Game.gameOverLabel.setText("Player 2 Wins");
             }
-            System.out.println("Player 1 Score: " + player1Score);
-            System.out.println("Player 2 Score: " + player2Score);
         }
         Fields.player1score = player1Score;
         Fields.player2score = player2Score;
