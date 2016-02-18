@@ -30,6 +30,13 @@ public class ComputerPlayer {
             return;
         }
 
+        if(board.isNew()) {
+            System.out.println("RANDOM");
+            Move move = random(board);
+            board.makeMove(move, max);
+            return;
+        }
+
         if (Fields.useMinimax()) {
             Move bestMove = lookAhead(board);
             board.makeMove(bestMove, max);
@@ -54,7 +61,10 @@ public class ComputerPlayer {
             }
         }
         Random random = new Random();
-        return moves.get(random.nextInt(moves.size()));
+        System.out.println();
+        Move m = moves.get(random.nextInt(moves.size()));
+        System.out.println("Move : " + m.row + ", " + m.col);
+        return m;
     }
 
     public Move casual(Board board) {
@@ -117,11 +127,12 @@ public class ComputerPlayer {
             }
         }
 
-        float bestEval = Float.MIN_VALUE;
+        System.out.println("Player: " + max + " | Level: " + maxLooks);
+        float bestEval = Float.MAX_VALUE;
         int bestIndex = -1;
         for (int i = 0; i < rootMovesArray.length; i++) {
             ArrayList<ArrayList> rootMovesList = rootMovesArray[i];
-            float wins = 0;
+            float loses = 0;
             float totalBoards = 0;
             for (ArrayList<Move> moveOrder : rootMovesList) {
                 int player = max;
@@ -130,22 +141,25 @@ public class ComputerPlayer {
                     temp.makeMove(move, player);
                     player = (player == max) ? min : max;
                 }
-                wins += othello.evaluate(temp, max);
+                loses += othello.evaluate(temp, max);
                 totalBoards++;
             }
-            float result = wins / totalBoards;
-            System.out.println(wins + ", " + totalBoards);
-            if (result > bestEval) {
+            float result = loses / totalBoards;
+            System.out.println("RESULT: " + result);
+            System.out.println(loses + ", " + totalBoards);
+            if ((bestIndex == -1) || (result < bestEval)) {
                 bestEval = result;
                 bestIndex = i;
             }
         }
 
         if (bestIndex == -1) {
+            System.out.println("BEST INDEX = -1");
             return rootNodes.get(0).getMove();
         }
 
         System.out.println(bestEval);
+        System.out.println("FINAL MOVE: " + rootNodes.get(bestIndex).getMove().row + ", " + rootNodes.get(bestIndex).getMove().col);
         return rootNodes.get(bestIndex).getMove();
     }
 
@@ -159,7 +173,7 @@ public class ComputerPlayer {
         }
 //        System.out.println(max+ " | " + maxLooks);
         if (allMoves.size() > 0) {
-            simMoves(mainNode, allMoves, board, max, min, maxLooks);
+                simMoves(mainNode, allMoves, board, max, min, maxLooks);
         }
     }
 
@@ -178,6 +192,10 @@ public class ComputerPlayer {
                 ArrayList<Move> opponentMoves = tempBoard.getAllMoves(playerB);
                 if (opponentMoves.size() > 0) {
                     this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA, depth - 1);
+                }else if(othello.gameEnded(board, false)) {
+
+                } else {
+                    this.simMoves(currNode, opponentMoves, tempBoard, playerA, playerB, depth - 1);
                 }
             }
         }

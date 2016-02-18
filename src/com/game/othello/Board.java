@@ -83,7 +83,7 @@ public class Board extends JPanel {
                     p2++;
             }
         }
-        return (p1 == 4) && (p2 == 1);
+        return ((p1 == 2) && (p2 == 2)) || ((p1 == 4) && (p2 == 1));
     }
 
     public ArrayList<Move> getAllMoves(int piece) {
@@ -100,7 +100,7 @@ public class Board extends JPanel {
     public void move(int row, int col, Board board) {
         if (!moving) {
             moving = true;
-            if (!othello.gameEnded(board)) {
+            if (!othello.gameEnded(board, true)) {
                 if (board.getAllMoves(Fields.currPlayer).size() > 0) {
                     if (!othello.isLegal(new Move(row, col), Fields.player, board)) {
                         moving = false;
@@ -117,7 +117,7 @@ public class Board extends JPanel {
                 Game.optionsPanel.setBackground(Fields.whiteColor);
                 othello.updateScore(board);
                 repaint();
-                othello.gameEnded(board);
+                othello.gameEnded(board, true);
                 if (board.getAllMoves(Fields.currPlayer).size() == 0) {
                     move(0, 0, board);
                 }
@@ -129,7 +129,7 @@ public class Board extends JPanel {
     public void twoPlayerMove(int row, int col, Board board) {
         if (!moving) {
             moving = true;
-            if (!othello.gameEnded(board)) {
+            if (!othello.gameEnded(board, true)) {
                 if (!othello.isLegal(new Move(row, col), Fields.currPlayer, board)) {
                     moving = false;
                     return;
@@ -145,7 +145,7 @@ public class Board extends JPanel {
                 othello.updateScore(board);
                 repaint();
                 moving = false;
-                othello.gameEnded(board);
+                othello.gameEnded(board, true);
             }
         }
     }
@@ -153,7 +153,7 @@ public class Board extends JPanel {
     public void move(Board board) {
         if (!moving) {
             moving = true;
-            if (!othello.gameEnded(board)) {
+            if (!othello.gameEnded(board, true)) {
                 cpuPlayerOpp.move(board);
                 Fields.currPlayer = Fields.BLACK;
                 Game.optionsPanel.setBackground(Fields.blackColor);

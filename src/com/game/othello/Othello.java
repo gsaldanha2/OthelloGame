@@ -40,12 +40,12 @@ public class Othello {
             }
         }
 //        System.out.println("PLAYER: " + player1Score + "," + player2Score);
-        if(player1Score > player2Score)
+        if(player1Score < player2Score)
             return +1f;
         return 0f;
     }
 
-    public boolean gameEnded(Board board) {
+    public boolean gameEnded(Board board, boolean show) {
         //check if possible legal moves
         for (int r = 0; r < board.getBoardHeight(); r++) {
             for (int c = 0; c < board.getBoardWidth(); c++) {
@@ -53,7 +53,6 @@ public class Othello {
                     return false;
             }
         }
-        System.out.println("GAME OVER");
         int player1Score = 0;
         for (int r = 0; r < board.getBoardHeight(); r++) {
             for (int c = 0; c < board.getBoardWidth(); c++) {
@@ -68,17 +67,18 @@ public class Othello {
                     player2Score++;
             }
         }
-        int boardsize = board.getBoardHeight() * board.getBoardWidth();
-        if(player1Score > boardsize/2) {
-            Game.gameOverLabel.setText("Game Over! Player 1 Wins");
-        }else if(player1Score == boardsize/2) {
-            Game.gameOverLabel.setText("Game Over! Draw");
-        }else {
-            Game.gameOverLabel.setText("Game Over! Player 2 Wins");
+        if(show) {
+            int boardsize = board.getBoardHeight() * board.getBoardWidth();
+            if (player1Score > boardsize / 2) {
+                Game.gameOverLabel.setText("Game Over! Player 1 Wins");
+            } else if (player1Score == boardsize / 2) {
+                Game.gameOverLabel.setText("Game Over! Draw");
+            } else {
+                Game.gameOverLabel.setText("Game Over! Player 2 Wins");
+            }
+            System.out.println("Player 1 Score: " + player1Score);
+            System.out.println("Player 2 Score: " + player2Score);
         }
-        System.out.println("Player 1 Score: " + player1Score);
-        System.out.println("Player 2 Score: " + player2Score);
-
         Fields.player1score = player1Score;
         Fields.player2score = player2Score;
         return true;
