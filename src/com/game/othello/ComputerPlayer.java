@@ -30,7 +30,7 @@ public class ComputerPlayer {
             return;
         }
 
-        if(board.isNew()) {
+        if(othello.getBoardPieces(board) <= 8) {
             System.out.println("RANDOM");
             Move move = random(board);
             board.makeMove(move, max);
