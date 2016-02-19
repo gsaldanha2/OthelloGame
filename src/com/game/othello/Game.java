@@ -18,6 +18,8 @@ public class Game {
     private ArrayList<Component> secondAiOptionsArray = new ArrayList<Component>();
     private ArrayList<Component> firstAiOptionsArray = new ArrayList<Component>();
 
+    private ImageIcon icon = new ImageIcon(getClass().getResource("icon.png"));
+
     private JFrame frame, startFrame;
     private Board board;
     public static JPanel optionsPanel;
@@ -124,6 +126,7 @@ public class Game {
         startFrame.pack();
         startFrame.setLocationRelativeTo(null);
         startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        startFrame.setIconImage(icon.getImage());
         startFrame.setVisible(true);
 
         aiBox.addActionListener(new ActionListener() {
@@ -242,7 +245,7 @@ public class Game {
         optionsPanel.add(currPlayerLabel);
         optionsPanel.add(colorSelector);
         optionsPanel.add(changeColors);
-        optionsPanel.add(giveUp);
+//        optionsPanel.add(giveUp);
 
         //create the board
         board = new Board(8, 8, 86);
@@ -258,6 +261,7 @@ public class Game {
         frame.getContentPane().add(optionsPanel, BorderLayout.EAST);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setIconImage(icon.getImage());
         frame.setVisible(true);
 
         giveUp.addActionListener(new ActionListener() {
