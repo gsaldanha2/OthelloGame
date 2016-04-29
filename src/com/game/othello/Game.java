@@ -230,7 +230,7 @@ public class Game {
         currPlayerLabel.setOpaque(true);
         currPlayerLabel.setBackground(Fields.whiteColor);
 
-        showLegalMoves = new JCheckBox("Show Legal Moves", true);
+        showLegalMoves = new JCheckBox("Show Legal Moves", false);
         JButton changeColors = new JButton("Change Color");
         JButton giveUp = new JButton("Give up");
         giveUp.setBackground(Color.yellow);
@@ -245,7 +245,7 @@ public class Game {
         optionsPanel.add(currPlayerLabel);
         optionsPanel.add(colorSelector);
         optionsPanel.add(changeColors);
-//        optionsPanel.add(giveUp);
+        optionsPanel.add(giveUp);
 
         //create the board
         board = new Board(8, 8, 86);
@@ -253,7 +253,7 @@ public class Game {
         System.out.println("Difficulty: " + Fields.difficulty);
 
         frame = new JFrame();
-        frame.setTitle("JOthello - Gregory Saldanha 2016");
+        frame.setTitle("JOthello - © Gregory Saldanha 2016");
         frame.setResizable(false);
         frame.setSize(8 * 87 + 150, 8 * 90);
         frame.getContentPane().setLayout(new BorderLayout());

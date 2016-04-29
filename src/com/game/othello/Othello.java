@@ -39,10 +39,10 @@ public class Othello {
                 }
             }
         }
-//        System.out.println("PLAYER: " + player1Score + "," + player2Score);
-        if(player1Score < player2Score)
-            return +1f;
-        return 0f;
+        if(player2Score > player1Score) {
+            return (float)(player2Score - player1Score);
+        }
+        return 0;
     }
 
     public boolean gameEnded(Board board, boolean show) {
@@ -76,6 +76,8 @@ public class Othello {
             } else {
                 Game.gameOverLabel.setText("Player 2 Wins");
             }
+            DebugHandler.writeGameData(player1Score, player2Score);
+            Game.restart();
         }
         Fields.player1score = player1Score;
         Fields.player2score = player2Score;

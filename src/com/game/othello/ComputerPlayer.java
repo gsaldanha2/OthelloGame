@@ -30,15 +30,15 @@ public class ComputerPlayer {
             return;
         }
 
-        if(othello.getBoardPieces(board) <= 8) {
+        if(othello.getBoardPieces(board) <= 4) {
             System.out.println("RANDOM");
-            Move move = random(board);
-            board.makeMove(move, max);
+            Move bestMove = lookAhead(board, 2);
+            board.makeMove(bestMove, max);
             return;
         }
 
         if (Fields.useMinimax()) {
-            Move bestMove = lookAhead(board);
+            Move bestMove = lookAhead(board, this.maxLooks);
             board.makeMove(bestMove, max);
         } else if (Fields.useRandom()) {
             Move move = random(board);
@@ -87,8 +87,8 @@ public class ComputerPlayer {
         return moves.get(bestIndex);
     }
 
-    public Move lookAhead(Board board) {
-        simMoves(board);
+    public Move lookAhead(Board board, int maxLooks) {
+        simMoves(board, maxLooks);
         //start from leaves and move upwards
         ArrayList<Node> leafNodes = new ArrayList<Node>();
         for (Node node : children) {
@@ -163,7 +163,7 @@ public class ComputerPlayer {
         return rootNodes.get(bestIndex).getMove();
     }
 
-    public void simMoves(Board board) {
+    public void simMoves(Board board, int maxLooks) {
         mainNode = new Node();
         children = new ArrayList<Node>();
         rootNodes = new ArrayList<Node>();
@@ -171,7 +171,6 @@ public class ComputerPlayer {
         for (Move move : allMoves) {
             rootNodes.add(new Node(mainNode, move));
         }
-//        System.out.println(max+ " | " + maxLooks);
         if (allMoves.size() > 0) {
                 simMoves(mainNode, allMoves, board, max, min, maxLooks);
         }
@@ -193,7 +192,6 @@ public class ComputerPlayer {
                 if (opponentMoves.size() > 0) {
                     this.simMoves(currNode, opponentMoves, tempBoard, playerB, playerA, depth - 1);
                 }else if(othello.gameEnded(board, false)) {
-
                 } else {
                     this.simMoves(currNode, opponentMoves, tempBoard, playerA, playerB, depth - 1);
                 }
