@@ -25,7 +25,7 @@ public class Game {
     public static JPanel optionsPanel;
     public static JLabel scoreLabel, gameOverLabel, currPlayerLabel;
     public static JCheckBox showLegalMoves;
-    private final String[] levels = {"Easy", "Medium", "Hard", "Insane"};
+    private final String[] levels = {"Easy", "Medium", "Hard"};
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -197,23 +197,19 @@ public class Game {
 
                 String level = diffCombo1.getSelectedItem().toString();
                 if (level.equalsIgnoreCase("easy"))
-                    Fields.difficulty = 2;
+                    Fields.difficulty = 1;
                 else if (level.equalsIgnoreCase("medium"))
-                    Fields.difficulty = 4;
+                    Fields.difficulty = 3;
                 else if (level.equalsIgnoreCase("hard"))
-                    Fields.difficulty = 6;
-                else if (level.equalsIgnoreCase("insane"))
-                    Fields.difficulty = 8;
+                    Fields.difficulty = 5;
 
                 level = diffCombo2.getSelectedItem().toString();
                 if (level.equalsIgnoreCase("easy"))
-                    Fields.difficultyOpp = 2;
+                    Fields.difficultyOpp = 1;
                 else if (level.equalsIgnoreCase("medium"))
-                    Fields.difficultyOpp = 4;
+                    Fields.difficultyOpp = 3;
                 else if (level.equalsIgnoreCase("hard"))
-                    Fields.difficultyOpp = 6;
-                else if (level.equalsIgnoreCase("insane"))
-                    Fields.difficultyOpp = 8;
+                    Fields.difficultyOpp = 5;
 
                 startFrame.dispose();
                 startGame();
