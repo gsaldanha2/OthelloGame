@@ -37,6 +37,25 @@ public class Othello {
         return starting - player1Score;
     }
 
+//    public float evaluate(Board board, int player) {
+//        int player1Score = 0;
+//        int player2Score = 0;
+//        int player2 = (player == 1) ? 2 : 1;
+//        for (int r = 0; r < board.getBoardHeight(); r++) {
+//            for (int c = 0; c < board.getBoardWidth(); c++) {
+//                if (board.getPieceAt(r, c) == player)
+//                    player1Score++;
+//                if(board.getPieceAt(r, c) == player2) {
+//                    player2Score++;
+//                }
+//            }
+//        }
+//        if(player2Score > player1Score) {
+//            return 1f;
+//        }
+//        return 0f;
+//    }
+
     public boolean gameEnded(Board board, boolean show) {
         //check if possible legal moves
         for (int r = 0; r < board.getBoardHeight(); r++) {
@@ -68,6 +87,9 @@ public class Othello {
             } else {
                 Game.gameOverLabel.setText("Player 2 Wins");
             }
+            //debug
+//            DebugHandler.writeGameData(player1Score, player2Score);
+//            Game.restart();
         }
         Fields.player1score = player1Score;
         Fields.player2score = player2Score;

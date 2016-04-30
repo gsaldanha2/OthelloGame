@@ -13,7 +13,7 @@ public class ComputerPlayer {
     private int max = 2;
     private int min = 1;
     private Node mainNode;
-    public static ArrayList<Node> children;
+    public ArrayList<Node> children;
     private ArrayList<Node> rootNodes;
 
     public ComputerPlayer(Othello othello, int player, int d) {
@@ -30,11 +30,11 @@ public class ComputerPlayer {
             return;
         }
 
-        if (othello.getBoardPieces(board) <= 6) {
-            Move bestMove = lookAhead(board, 4);
-            board.makeMove(bestMove, max);
-            return;
-        }
+//        if (othello.getBoardPieces(board) <= 8 && max == 2) {
+//            Move bestMove = random(board);
+//            board.makeMove(bestMove, max);
+//            return;
+//        }
 
         if (Fields.useMinimax()) {
             Move bestMove = lookAhead(board, this.maxLooks);
@@ -128,6 +128,7 @@ public class ComputerPlayer {
             }
         }
 
+        //unused
         //<editor-fold desc="OldEval">
         //        for (int i = 0; i < rootMovesArray.length; i++) {
 //            ArrayList<ArrayList> rootMovesList = rootMovesArray[i];

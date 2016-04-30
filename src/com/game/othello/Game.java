@@ -30,6 +30,12 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
         game.openWindow();
+//        Fields.difficulty=3;
+//        Fields.difficultyOpp=3;
+//        Fields.minimaxOpp=true;
+//        Fields.minimax=true;
+//        Fields.playType=0;
+//        game.startGame();
     }
 
     public void openWindow() {

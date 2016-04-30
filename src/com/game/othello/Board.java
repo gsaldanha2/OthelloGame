@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class Board extends JPanel {
 
 
         this.setPreferredSize(new Dimension(width * tileSize, height * tileSize));
-        this.addMouseListener(new MouseAdapter() {
+        MouseListener listener = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -65,7 +66,8 @@ public class Board extends JPanel {
                     }).start();
                 }
             }
-        });
+        };
+        this.addMouseListener(listener);
     }
 
     public void makeMove(Move move, int piece) {
