@@ -174,6 +174,19 @@ public class ComputerPlayer {
                             points += Fields.cornerBiasPoints;
                         else
                             points -= Fields.cornerBiasPoints;
+                    }else if((row == 0 && (col == 1 || col == width-1)) || (row == 1 && (col == 0 || col == 1 ||
+                            col == width-1 || col == width)) ||
+                            (row == height && (col == 1 || col == width-1)) || (row == height-1 && (col == 0 || col == 1 ||
+                            col == width-1 || col == width))) {
+                        if(player == max)
+                            points += Fields.cornerRiskPoints;
+                        else
+                            points -= Fields.cornerRiskPoints;
+                    }else if(row == 0 || row == height || col == 0 || col == width) {
+                        if(player == max)
+                            points += Fields.edgeBiasPoints;
+                        else
+                            points -= Fields.edgeBiasPoints;
                     }
                     temp.makeMove(move, player);
                 }

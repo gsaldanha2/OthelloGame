@@ -7,12 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21e6b96a-30ed-40c1-b456-a2ac181922b5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Board.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Board.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java" afterPath="$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Fields.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Fields.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Move.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Move.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Node.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Othello.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Othello.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
@@ -70,8 +66,8 @@
       <file leaf-file-name="Fields.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/game/othello/Fields.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="62" max-vertical-offset="1173">
-              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+              <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -120,8 +116,8 @@
       <file leaf-file-name="ComputerPlayer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75156575" vertical-offset="2207" max-vertical-offset="3774">
-              <caret line="176" column="21" selection-start-line="176" selection-start-column="21" selection-end-line="176" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.5031315" vertical-offset="2394" max-vertical-offset="3995">
+              <caret line="180" column="41" selection-start-line="180" selection-start-column="41" selection-end-line="180" selection-end-column="41" />
               <folding>
                 <element signature="e#4412#4442#0" expanded="false" />
               </folding>
@@ -221,11 +217,11 @@
         <option value="$PROJECT_DIR$/src/com/game/othello/ColorHandler.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Game.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Othello.java" />
-        <option value="$PROJECT_DIR$/src/com/game/othello/Fields.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Node.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Board.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Move.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java" />
+        <option value="$PROJECT_DIR$/src/com/game/othello/Fields.java" />
       </list>
     </option>
   </component>
@@ -839,7 +835,11 @@
       <created>1461976212170</created>
       <updated>1461976212170</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="fixes">
+      <created>1461979429920</created>
+      <updated>1461979429920</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1401,14 +1401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/game/othello/Fields.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="62" max-vertical-offset="1173">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/game/othello/WriteFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
@@ -1445,10 +1437,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/game/othello/Fields.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+          <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75156575" vertical-offset="2207" max-vertical-offset="3774">
-          <caret line="176" column="21" selection-start-line="176" selection-start-column="21" selection-end-line="176" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.5031315" vertical-offset="2394" max-vertical-offset="3995">
+          <caret line="180" column="41" selection-start-line="180" selection-start-column="41" selection-end-line="180" selection-end-column="41" />
           <folding>
             <element signature="e#4412#4442#0" expanded="false" />
           </folding>
