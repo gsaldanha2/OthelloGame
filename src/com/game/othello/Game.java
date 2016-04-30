@@ -71,8 +71,8 @@ public class Game {
         group1.add(casualBox);
         group1.add(randomBox);
 
-        final JCheckBox cornerBox = new JCheckBox("Corner Bias", true);
-        firstAiOptionsArray.add(cornerBox);
+        final JCheckBox regionBox = new JCheckBox("Region Bias", true);
+        firstAiOptionsArray.add(regionBox);
 
         //second ai options
         ButtonGroup group2 = new ButtonGroup();
@@ -86,8 +86,8 @@ public class Game {
         group1.add(casualBox);
         group1.add(randomBox);
 
-        final JCheckBox cornerBoxOpp = new JCheckBox("Corner Bias", true);
-        secondAiOptionsArray.add(cornerBoxOpp);
+        final JCheckBox regionBoxOpp = new JCheckBox("Region Bias", true);
+        secondAiOptionsArray.add(regionBoxOpp);
 
         JButton btn = new JButton("Start");
         final JComboBox diffCombo1 = new JComboBox(levels);
@@ -112,7 +112,7 @@ public class Game {
         panel.add(casualBox);
         panel.add(randomBox);
         panel.add(addonsLabel);
-        panel.add(cornerBox);
+        panel.add(regionBox);
         panel.add(diffCombo1);
 
         panel.add(settings2Label);
@@ -120,7 +120,7 @@ public class Game {
         panel.add(casualBoxOpp);
         panel.add(randomBoxOpp);
         panel.add(addonsLabel2);
-        panel.add(cornerBoxOpp);
+        panel.add(regionBoxOpp);
         panel.add(diffCombo2);
 
         panel.add(btn);
@@ -188,7 +188,7 @@ public class Game {
                 else if (casualBox.isSelected())
                     Fields.casual = true;
 
-                if (cornerBox.isSelected())
+                if (regionBox.isSelected())
                     Fields.corners = true;
 
                 if (minimaxBoxOpp.isSelected())
@@ -198,7 +198,7 @@ public class Game {
                 else if (casualBoxOpp.isSelected())
                     Fields.casualOpp = true;
 
-                if (cornerBoxOpp.isSelected())
+                if (regionBoxOpp.isSelected())
                     Fields.cornersOpp = true;
 
                 String level = diffCombo1.getSelectedItem().toString();

@@ -161,32 +161,33 @@ public class ComputerPlayer {
             ArrayList<ArrayList> rootMovesList = rootMovesArray[i];
             int minCase = Integer.MAX_VALUE;
             for (ArrayList<Move> moveOrder : rootMovesList) {
-                int player = max;
                 Board temp = board.cloneBoard();
                 int points = startingPoints;
                 for (Move move : moveOrder) {
-                    player = move.getPlayer();
+                    int player = move.getPlayer();
                     points += othello.evaluate(temp, player, startingPoints);
-                    int row = move.getRow();
-                    int col = move.getCol();
-                    if((row == 0 || row == width) && (col == 0 || col == height)) { //corner bias
-                        if(player == max)
-                            points += Fields.cornerBiasPoints;
-                        else
-                            points -= Fields.cornerBiasPoints;
-                    }else if((row == 0 && (col == 1 || col == width-1)) || (row == 1 && (col == 0 || col == 1 ||
-                            col == width-1 || col == width)) ||
-                            (row == height && (col == 1 || col == width-1)) || (row == height-1 && (col == 0 || col == 1 ||
-                            col == width-1 || col == width))) {
-                        if(player == max)
-                            points += Fields.cornerRiskPoints;
-                        else
-                            points -= Fields.cornerRiskPoints;
-                    }else if(row == 0 || row == height || col == 0 || col == width) {
-                        if(player == max)
-                            points += Fields.edgeBiasPoints;
-                        else
-                            points -= Fields.edgeBiasPoints;
+                    if(Fields.useCorners()) {
+                        int row = move.getRow();
+                        int col = move.getCol();
+                        if ((row == 0 || row == width) && (col == 0 || col == height)) { //corner bias
+                            if (player == max)
+                                points += Fields.cornerBiasPoints;
+                            else
+                                points -= Fields.cornerBiasPoints;
+                        } else if ((row == 0 && (col == 1 || col == width - 1)) || (row == 1 && (col == 0 || col == 1 ||
+                                col == width - 1 || col == width)) ||
+                                (row == height && (col == 1 || col == width - 1)) || (row == height - 1 && (col == 0 || col == 1 ||
+                                col == width - 1 || col == width))) {
+                            if (player == max)
+                                points += Fields.cornerRiskPoints;
+                            else
+                                points -= Fields.cornerRiskPoints;
+                        } else if (row == 0 || row == height || col == 0 || col == width) {
+                            if (player == max)
+                                points += Fields.edgeBiasPoints;
+                            else
+                                points -= Fields.edgeBiasPoints;
+                        }
                     }
                     temp.makeMove(move, player);
                 }
