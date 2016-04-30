@@ -75,19 +75,6 @@ public class Board extends JPanel {
         othello.flipPieces(othello.getFlips(move, piece, this), piece, this);
     }
 
-    public boolean isNew() {
-        int p1 = 0, p2 = 0;
-        for (int r = 0; r < getBoardHeight(); r++) {
-            for (int c = 0; c < getBoardWidth(); c++) {
-                if (getPieceAt(r, c) == Fields.WHITE)
-                    p1++;
-                else if (getPieceAt(r, c) == Fields.BLACK)
-                    p2++;
-            }
-        }
-        return ((p1 == 2) && (p2 == 2)) || ((p1 == 4) && (p2 == 1));
-    }
-
     public ArrayList<Move> getAllMoves(int piece) {
         ArrayList<Move> moves = new ArrayList<Move>();
         for (int r = 0; r < getBoardHeight(); r++) {
@@ -121,6 +108,7 @@ public class Board extends JPanel {
                 repaint();
                 othello.gameEnded(board, true);
                 if (board.getAllMoves(Fields.currPlayer).size() == 0) {
+                    moving = false;
                     move(0, 0, board);
                 }
             }

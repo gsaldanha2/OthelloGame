@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21e6b96a-30ed-40c1-b456-a2ac181922b5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java" afterPath="$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Fields.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Fields.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/game/othello/Board.java" afterPath="$PROJECT_DIR$/src/com/game/othello/Board.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,21 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Board.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Board.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/game/othello/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1286" max-vertical-offset="4216">
-              <caret line="95" column="53" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.4265233" vertical-offset="1224" max-vertical-offset="4012">
+              <caret line="98" column="17" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
               <folding>
                 <element signature="e#1476#2364#0" expanded="true" />
                 <element signature="e#1813#2312#0" expanded="true" />
                 <element signature="e#2289#2290#0" expanded="true" />
                 <element signature="e#2353#2354#0" expanded="true" />
-                <element signature="e#3107#3113#0" expanded="true" />
-                <element signature="e#8435#8436#0" expanded="true" />
-                <element signature="e#8494#8495#0" expanded="true" />
-                <element signature="e#8709#8710#0" expanded="true" />
-                <element signature="e#8737#8738#0" expanded="true" />
+                <element signature="e#2676#2682#0" expanded="true" />
+                <element signature="e#8040#8041#0" expanded="true" />
+                <element signature="e#8099#8100#0" expanded="true" />
+                <element signature="e#8314#8315#0" expanded="true" />
+                <element signature="e#8342#8343#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ComputerPlayer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ComputerPlayer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5031315" vertical-offset="2394" max-vertical-offset="3995">
-              <caret line="180" column="41" selection-start-line="180" selection-start-column="41" selection-end-line="180" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1561" max-vertical-offset="3995">
+              <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
               <folding>
                 <element signature="e#4412#4442#0" expanded="false" />
               </folding>
@@ -218,10 +217,10 @@
         <option value="$PROJECT_DIR$/src/com/game/othello/Game.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Othello.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Node.java" />
-        <option value="$PROJECT_DIR$/src/com/game/othello/Board.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Move.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java" />
         <option value="$PROJECT_DIR$/src/com/game/othello/Fields.java" />
+        <option value="$PROJECT_DIR$/src/com/game/othello/Board.java" />
       </list>
     </option>
   </component>
@@ -839,7 +838,11 @@
       <created>1461979429920</created>
       <updated>1461979429920</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="fixes">
+      <created>1461980152683</created>
+      <updated>1461980152683</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -864,7 +867,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2953125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3973363" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1218" y="-167" width="1185" height="890" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3973363" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1218" y="-167" width="1185" height="890" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1000,11 +1003,11 @@
             <element signature="e#1813#2312#0" expanded="true" />
             <element signature="e#2289#2290#0" expanded="true" />
             <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1075,11 +1078,11 @@
             <element signature="e#1813#2312#0" expanded="true" />
             <element signature="e#2289#2290#0" expanded="true" />
             <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1142,11 +1145,11 @@
             <element signature="e#1813#2312#0" expanded="true" />
             <element signature="e#2289#2290#0" expanded="true" />
             <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1209,11 +1212,11 @@
             <element signature="e#1813#2312#0" expanded="true" />
             <element signature="e#2289#2290#0" expanded="true" />
             <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1260,11 +1263,11 @@
             <element signature="e#1813#2312#0" expanded="true" />
             <element signature="e#2289#2290#0" expanded="true" />
             <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1286,11 +1289,11 @@
             <element signature="e#1813#2312#0" expanded="true" />
             <element signature="e#2289#2290#0" expanded="true" />
             <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1375,24 +1378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/game/othello/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1286" max-vertical-offset="4216">
-          <caret line="95" column="53" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="53" />
-          <folding>
-            <element signature="e#1476#2364#0" expanded="true" />
-            <element signature="e#1813#2312#0" expanded="true" />
-            <element signature="e#2289#2290#0" expanded="true" />
-            <element signature="e#2353#2354#0" expanded="true" />
-            <element signature="e#3107#3113#0" expanded="true" />
-            <element signature="e#8435#8436#0" expanded="true" />
-            <element signature="e#8494#8495#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8737#8738#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/game/othello/HumanPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
@@ -1447,10 +1432,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/game/othello/ComputerPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5031315" vertical-offset="2394" max-vertical-offset="3995">
-          <caret line="180" column="41" selection-start-line="180" selection-start-column="41" selection-end-line="180" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1561" max-vertical-offset="3995">
+          <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
           <folding>
             <element signature="e#4412#4442#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/game/othello/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4265233" vertical-offset="1224" max-vertical-offset="4012">
+          <caret line="98" column="17" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
+          <folding>
+            <element signature="e#1476#2364#0" expanded="true" />
+            <element signature="e#1813#2312#0" expanded="true" />
+            <element signature="e#2289#2290#0" expanded="true" />
+            <element signature="e#2353#2354#0" expanded="true" />
+            <element signature="e#2676#2682#0" expanded="true" />
+            <element signature="e#8040#8041#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8342#8343#0" expanded="true" />
           </folding>
         </state>
       </provider>
