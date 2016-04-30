@@ -107,6 +107,7 @@ public class Board extends JPanel {
                 othello.updateScore(board);
                 repaint();
                 othello.gameEnded(board, true);
+                new PlayerSound();
                 if (board.getAllMoves(Fields.currPlayer).size() == 0) {
                     moving = false;
                     move(0, 0, board);

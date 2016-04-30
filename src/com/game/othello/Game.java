@@ -24,7 +24,7 @@ public class Game {
     private Board board;
     public static JPanel optionsPanel;
     public static JLabel scoreLabel, gameOverLabel, currPlayerLabel;
-    public static JCheckBox showLegalMoves;
+    public static JCheckBox showLegalMoves, playerSound;
     private final String[] levels = {"Easy", "Medium", "Hard"};
 
     public static void main(String[] args) {
@@ -233,6 +233,7 @@ public class Game {
         currPlayerLabel.setBackground(Fields.whiteColor);
 
         showLegalMoves = new JCheckBox("Show Legal Moves", false);
+        playerSound = new JCheckBox("Notify On Turn", false);
         JButton changeColors = new JButton("Change Color");
         JButton giveUp = new JButton("Give up");
         giveUp.setBackground(Color.yellow);
@@ -240,8 +241,9 @@ public class Game {
 
         optionsPanel = new JPanel();
         optionsPanel.setLayout(new GridLayout(0, 1));
-        optionsPanel.setPreferredSize(new Dimension(150, 8*86));
+        optionsPanel.setPreferredSize(new Dimension(150, 8 * 86));
         optionsPanel.add(showLegalMoves);
+        optionsPanel.add(playerSound);
         optionsPanel.add(scoreLabel);
         optionsPanel.add(gameOverLabel);
         optionsPanel.add(currPlayerLabel);
@@ -305,6 +307,7 @@ public class Game {
                 board.repaint();
             }
         });
+
     }
 
     public static void restart() {
