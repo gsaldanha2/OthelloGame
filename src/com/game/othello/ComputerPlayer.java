@@ -52,8 +52,8 @@ public class ComputerPlayer {
         ArrayList<Move> moves = board.getAllMoves(max);
         if (Fields.useCorners()) {
             for (Move move : moves) {
-                int row = move.row;
-                int col = move.col;
+                int row = move.getRow();
+                int col = move.getCol();
                 if ((col == 0 && (row == 0 || row == board.getBoardHeight() - 1)) || (col == board.getBoardWidth() - 1 && (row == 0 || row == board.getBoardHeight() - 1))) { //corner bias
                     return move;
                 }
@@ -62,7 +62,7 @@ public class ComputerPlayer {
         Random random = new Random();
         System.out.println();
         Move m = moves.get(random.nextInt(moves.size()));
-        System.out.println("Move : " + m.row + ", " + m.col);
+        System.out.println("Move : " + m.getRow() + ", " + m.getCol());
         return m;
     }
 
@@ -75,8 +75,8 @@ public class ComputerPlayer {
             if (val > bestValue) {
                 bestValue = val;
                 bestIndex = moves.indexOf(move);
-                int row = move.row;
-                int col = move.col;
+                int row = move.getRow();
+                int col = move.getCol();
                 if (Fields.useCorners() && (col == 0 && (row == 0 || row == board.getBoardHeight() - 1)) || (col == board.getBoardWidth() - 1 && (row == 0 || row == board.getBoardHeight() - 1))) { //corner bias
                     break;
                 }
@@ -88,7 +88,7 @@ public class ComputerPlayer {
 
     public Move lookAhead(Board board, int maxLooks) {
         int startingPoints = Math.abs(othello.evaluate(board, max, 0));
-        System.out.println("Starting: " + startingPoints);
+//        System.out.println("Starting: " + startingPoints);
         simMoves(board, maxLooks);
         //start from leaves and move upwards
         ArrayList<Node> leafNodes = new ArrayList<Node>();
@@ -154,37 +154,53 @@ public class ComputerPlayer {
 //        }
         //</editor-fold>
 
-        int bestEval = Integer.MIN_VALUE;
-        int bestIndex = -1;
         //<editor-fold desc="NewEval">
+        int width = board.getBoardWidth() -1;
+        int height = board.getBoardHeight()-1;
         for (int i = 0; i < rootMovesArray.length; i++) {
             ArrayList<ArrayList> rootMovesList = rootMovesArray[i];
             int minCase = Integer.MAX_VALUE;
             for (ArrayList<Move> moveOrder : rootMovesList) {
                 int player = max;
                 Board temp = board.cloneBoard();
+                int points = startingPoints;
                 for (Move move : moveOrder) {
+                    player = move.getPlayer();
+                    points += othello.evaluate(temp, player, startingPoints);
+                    int row = move.getRow();
+                    int col = move.getCol();
+                    if((row == 0 || row == width) && (col == 0 || col == height)) { //corner bias
+                        if(player == max)
+                            points += Fields.cornerBiasPoints;
+                        else
+                            points -= Fields.cornerBiasPoints;
+                    }
                     temp.makeMove(move, player);
-                    player = (player == max) ? min : max;
                 }
-                int r = othello.evaluate(temp, player, startingPoints);
-                if(r < minCase) {
-                    minCase = r;
+                if(points < minCase) {
+                    minCase = points;
                 }
             }
-            if (minCase > bestEval) {
-                bestEval = minCase;
-                bestIndex = i;
-            }
+            rootNodes.get(i).setScore(minCase);
         }
         //</editor-fold>
 
-        if (bestIndex == -1) {
-            System.out.println("BEST INDEX = -1");
+        Node bestNode = null;
+        int bestEval = Integer.MIN_VALUE;
+        for(Node n : rootNodes) {
+            if (n.getScore() > bestEval) {
+                bestEval = n.getScore();
+                bestNode = n;
+            }
+        }
+
+        if (bestNode == null) {
+            System.out.println("NO BEST NODE");
+            System.exit(-1);
             return rootNodes.get(0).getMove();
         }
 
-        return rootNodes.get(bestIndex).getMove();
+        return bestNode.getMove();
     }
 
     public void simMoves(Board board, int maxLooks) {
@@ -193,7 +209,7 @@ public class ComputerPlayer {
         rootNodes = new ArrayList<Node>();
         ArrayList<Move> allMoves = board.getAllMoves(max);
         for (Move move : allMoves) {
-            rootNodes.add(new Node(mainNode, move));
+            rootNodes.add(new Node(mainNode, move, max, max));
         }
         if (allMoves.size() > 0) {
             simMoves(mainNode, allMoves, board, max, min, maxLooks);
@@ -205,7 +221,7 @@ public class ComputerPlayer {
         //System.out.println(children.size());
         if (depth > 0) {
             for (Move currMove : allMoves) {
-                Node currNode = new Node(parent, currMove);
+                Node currNode = new Node(parent, currMove, max, playerA);
                 children.add(currNode);
                 parent.addChild(currNode);
                 //make move

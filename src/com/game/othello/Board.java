@@ -93,7 +93,7 @@ public class Board extends JPanel {
         for (int r = 0; r < getBoardHeight(); r++) {
             for (int c = 0; c < getBoardWidth(); c++) {
                 if (othello.isLegal(new Move(r, c), piece, this))
-                    moves.add(new Move(r, c));
+                    moves.add(new Move(r, c, piece));
             }
         }
         return moves;
@@ -203,7 +203,7 @@ public class Board extends JPanel {
         if (Game.showLegalMoves.isSelected()) {
             g.setColor(Color.RED);
             for (Move legalMove : getAllMoves(Fields.currPlayer)) {
-                g.fillOval(legalMove.col * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalMove.row * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalTileSize, legalTileSize);
+                g.fillOval(legalMove.getCol() * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalMove.getRow() * tileSize + (tileSize / 2 - (legalTileSize / 2)), legalTileSize, legalTileSize);
             }
         }
     }
@@ -232,7 +232,7 @@ public class Board extends JPanel {
     }
 
     public void setPiece(Move move, int piece) {
-        board[move.row][move.col] = piece;
+        board[move.getRow()][move.getCol()] = piece;
     }
 
     public void setPiece(int row, int col, int piece) {

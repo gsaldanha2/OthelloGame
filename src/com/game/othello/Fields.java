@@ -11,6 +11,7 @@ public class Fields {
     public static final int BLACK = 2;
     public static final int EMPTY = -1;
     public static int playType = 1;
+    public static int cornerBiasPoints = 5;
     public static boolean minimax = false, corners = false, random = false, casual = false, minimaxOpp = false, cornersOpp = false, randomOpp = false, casualOpp = false;
     public static int difficulty = 1, difficultyOpp = 1;
     public static int player = 1, ai = 2, currPlayer = 1;

@@ -107,8 +107,8 @@ public class Othello {
     }
 
     public ArrayList<Move> getFlips(Move move, int piece, Board board) {
-        int row = move.row;
-        int col = move.col;
+        int row = move.getRow();
+        int col = move.getCol();
         int oppPiece = (piece == 1) ? 2 : 1;
         ArrayList<Move> flippedPieces = new ArrayList<Move>();
 
@@ -158,8 +158,8 @@ public class Othello {
     }
 
     public boolean isLegal(Move move, int piece, Board board) {
-        int row = move.row;
-        int col = move.col;
+        int row = move.getRow();
+        int col = move.getCol();
         int oppPiece = (piece == 1) ? 2 : 1;
         if (board.getPieceAt(row, col) != Fields.EMPTY) return false;
         for (int[] dir : directions) {
